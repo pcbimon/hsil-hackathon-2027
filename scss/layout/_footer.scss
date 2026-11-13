@@ -18,7 +18,10 @@
 
   .btn--mint { margin-top: 8px; align-self: flex-start; font-size: 14px; font-weight: 500; }
 
-  &__legal { padding-top: 20px; padding-bottom: 32px; border-top: 1px solid var(--deep-divider); font-size: 12px; color: var(--on-deep-muted); }
+  &__legal {
+    padding-top: 20px; padding-bottom: 32px; border-top: 1px solid var(--deep-divider); font-size: 12px; color: var(--on-deep-muted);
+    a { color: var(--mint-soft); &:hover { color: var(--white); } }
+  }
 }
 
 .lang-switch { display: flex; gap: 8px; margin-top: 4px; }

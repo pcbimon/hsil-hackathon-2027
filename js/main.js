@@ -101,8 +101,21 @@ function setupNavToggle() {
   header.querySelectorAll('.main-nav a').forEach((a) => a.addEventListener('click', () => setOpen(false)));
 }
 
+// Demo Day glows twice when it first scrolls into view (CSS holds the animation, reduced motion skips it).
+function setupBostonGlow() {
+  const el = document.querySelector('.step--boston');
+  if (!el || !('IntersectionObserver' in window)) return;
+  const io = new IntersectionObserver((entries) => {
+    if (!entries.some((e) => e.isIntersecting)) return;
+    io.disconnect();
+    el.classList.add('is-seen');
+  }, { threshold: 0.6 });
+  io.observe(el);
+}
+
 applyCta(CTA);
 setupNavToggle();
 renderCountdown();
 markCurrentStep(Date.now());
 setupCountUps();
+setupBostonGlow();

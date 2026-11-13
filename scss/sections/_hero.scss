@@ -3,8 +3,17 @@
 // Follows the client artwork assets/aw/Harvard Hackathon 2027_ComingSoon.jpg
 .hero {
   position: relative; overflow: hidden; color: var(--white);
-  background: var(--teal-850) url("../assets/hero-bg.webp") right bottom / cover no-repeat;
-  @include mobile { background-position: 70% bottom; }
+  // The scrim keeps the copy at 4.5:1 or better where the artwork turns busy and light
+  background:
+    linear-gradient(90deg, var(--hero-scrim) 0%, transparent 70%),
+    var(--teal-850) url("../assets/hero-bg.webp") right bottom / cover no-repeat;
+  // Below desktop the copy runs almost the full width, so the shade does too
+  @include tablet-down {
+    background:
+      linear-gradient(90deg, var(--hero-scrim) 0%, var(--hero-scrim) 40%, transparent 100%),
+      var(--teal-850) url("../assets/hero-bg.webp") right bottom / cover no-repeat;
+  }
+  @include mobile { background-position: 0 0, 70% bottom; }
 
   &__inner {
     padding-top: 80px; padding-bottom: 96px;
@@ -49,7 +58,7 @@
     @include mobile { font-size: 19px; }
   }
   &__countdown {
-    font-size: 14px; font-weight: 500; padding: 4px 12px; border-radius: var(--pill); border: 1px solid var(--mint); color: var(--mint);
+    font-size: 14px; font-weight: 500; padding: 4px 12px; border-radius: var(--pill); border: 1px solid var(--mint); color: var(--mint); background: var(--overlay-deep);
     &:empty { display: none; }
   }
   &__offer {
