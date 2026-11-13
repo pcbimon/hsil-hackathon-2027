@@ -1,0 +1,36 @@
+@use "../abstracts" as *;
+
+// "What you get": prize panel + benefit cards
+.benefits {
+  background: var(--surface); border-top: 1px solid var(--line);
+
+  &__inner {
+    padding-top: 96px; padding-bottom: 96px; display: flex; flex-direction: column; gap: 32px;
+    @include mobile { padding-top: 64px; padding-bottom: 64px; }
+  }
+}
+
+.prize {
+  display: flex; flex-wrap: wrap; gap: 24px 48px; align-items: center; justify-content: space-between;
+  padding: 32px; border-radius: var(--radius); color: var(--white);
+  background: linear-gradient(120deg, var(--teal-950) 0%, var(--teal-800) 100%);
+  @include mobile { padding: 24px; }
+
+  &__total { display: flex; flex-direction: column; }
+  &__label { font-size: 15px; color: var(--on-deep-muted); }
+  &__num {
+    font-size: 56px; font-weight: 700; line-height: 1.1; color: var(--mint);
+    @include mobile { font-size: 40px; }
+  }
+  &__tiers {
+    list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 12px;
+
+    li {
+      display: flex; flex-direction: column; padding: 14px 20px; min-width: 150px;
+      border: 1px solid var(--deep-line); border-radius: 12px; background: var(--overlay-deep);
+      &:first-child { border-color: var(--crimson-bright); }
+    }
+    span { font-size: 13px; color: var(--on-deep-muted); }
+    strong { font-size: 24px; font-weight: 600; }
+  }
+}

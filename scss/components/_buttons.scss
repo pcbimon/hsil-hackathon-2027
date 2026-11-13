@@ -1,0 +1,21 @@
+.btn {
+  display: inline-flex;
+  align-items: center;
+  min-height: 54px;
+  padding: 14px 28px;
+  border-radius: var(--pill);
+  font-size: 17px;
+  text-decoration: none;
+
+  &--mint {
+    background: var(--mint); color: var(--on-mint); font-weight: 600;
+    &:hover { background: var(--mint-soft); color: var(--on-mint); }
+  }
+  &--ghost {
+    background: transparent; color: var(--white); font-weight: 400; border: 1px solid var(--mint-soft); padding: 14px 26px;
+    &:hover { background: var(--hover-on-dark); color: var(--white); }
+  }
+  &--small { min-height: var(--tap); padding: 10px 20px; font-size: 15px; }
+}
+
+.btn-row { display: flex; flex-wrap: wrap; gap: 12px; }

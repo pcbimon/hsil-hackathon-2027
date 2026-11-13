@@ -1,0 +1,8 @@
+@use "../abstracts" as *;
+
+.eyebrow {
+  font-size: 14px; font-weight: 500; letter-spacing: 0.04em; color: var(--crimson);
+
+  &--wide { letter-spacing: 0.2em; }
+  &--mint { color: var(--mint); letter-spacing: 0.2em; }
+}

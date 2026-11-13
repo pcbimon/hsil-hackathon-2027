@@ -1,0 +1,13 @@
+// Content still awaiting real material. See CLAUDE.md "Content conventions".
+.placeholder {
+  border: 1.5px dashed var(--placeholder);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 13px;
+  color: var(--ink-soft);
+}
+
+.todo { color: var(--crimson); } // content still awaiting confirmation

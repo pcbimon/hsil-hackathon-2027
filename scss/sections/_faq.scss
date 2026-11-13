@@ -1,0 +1,23 @@
+@use "../abstracts" as *;
+
+.faq {
+  max-width: 880px; margin: 0 auto; padding: 96px var(--gutter); display: flex; flex-direction: column; gap: 32px;
+  @include mobile { padding-top: 64px; padding-bottom: 64px; }
+
+  .section-head h2 { font-weight: 600; }
+  &__list { border-top: 1px solid var(--line-strong); }
+  &__item {
+    border-bottom: 1px solid var(--line-strong); padding: 4px 0;
+
+    summary {
+      cursor: pointer; list-style: none;
+      display: flex; justify-content: space-between; align-items: center; gap: 16px;
+      padding: 18px 0; font-size: 18px; font-weight: 500; min-height: var(--tap);
+
+      &::-webkit-details-marker { display: none; }
+    }
+    p { margin: 0 0 20px; font-size: 16px; color: var(--ink-soft); }
+  }
+  &__plus { font-size: 26px; font-weight: 300; color: var(--green); transition: transform 0.2s; }
+  &__item[open] &__plus { transform: rotate(45deg); }
+}

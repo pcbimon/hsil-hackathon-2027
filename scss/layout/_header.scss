@@ -1,0 +1,68 @@
+@use "../abstracts" as *;
+
+.site-header {
+  background: var(--surface); border-bottom: 1px solid var(--line);
+
+  &__inner {
+    padding-top: 14px; padding-bottom: 14px;
+    display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px;
+  }
+}
+
+.brand {
+  display: flex; align-items: center; gap: 14px;
+  @include mobile { flex: 1 1 0; min-width: 0; gap: 10px; }
+
+  &__seal {
+    width: 44px; height: 44px; flex: none;
+    @include mobile { width: 36px; height: 36px; }
+  }
+  &__partner {
+    height: 32px; width: auto; flex: none;
+    @include mobile { height: 22px; }
+  }
+  &__x { font-size: 18px; color: var(--crimson); font-weight: 600; }
+}
+
+.main-nav {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 22px; font-size: 15px; font-weight: 400;
+
+  a:not(.btn) {
+    color: var(--ink); text-decoration: none;
+    &:hover { color: var(--green); }
+  }
+  .btn {
+    background: var(--green); color: var(--white); font-weight: 500;
+    &:hover { background: var(--green-dark); }
+  }
+}
+
+.nav-toggle {
+  display: none; place-items: center; width: var(--tap); height: var(--tap); padding: 0;
+  border: 1px solid var(--line-strong); border-radius: 10px; background: var(--surface); color: var(--ink); cursor: pointer;
+
+  svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; }
+}
+.nav-toggle__close, .nav-toggle[aria-expanded="true"] .nav-toggle__open { display: none; }
+.nav-toggle[aria-expanded="true"] .nav-toggle__close { display: inline; }
+
+.lang-toggle {
+  font: inherit; font-size: 13px; padding: 8px 12px; min-height: var(--tap);
+  border: 1px solid var(--line-strong); background: var(--surface); border-radius: var(--pill);
+  color: var(--ink); cursor: pointer;
+}
+
+// Tablet and below: the full nav no longer fits beside the logos, so collapse it behind .nav-toggle.
+// .has-nav-toggle is added by js/main.js, so without JS the nav stays visible.
+@include tablet-down {
+  .has-nav-toggle .nav-toggle { display: grid; }
+  .has-nav-toggle .main-nav { display: none; }
+  .has-nav-toggle.is-nav-open .main-nav { display: flex; flex-direction: column; align-items: stretch; gap: 0; width: 100%; }
+  .is-nav-open .main-nav a:not(.btn) { display: flex; align-items: center; min-height: var(--tap); border-bottom: 1px solid var(--line); }
+  .is-nav-open .lang-toggle { align-self: flex-start; margin-top: 12px; }
+}
+
+@include mobile {
+  .main-nav { gap: 12px 18px; }
+  .main-nav .btn { display: none; } // the sticky .m-bar carries this CTA on mobile
+}

@@ -1,0 +1,25 @@
+@use "../abstracts" as *;
+
+// "Who should join": audience cards + quick facts
+.about {
+  padding-top: 96px; padding-bottom: 96px; display: flex; flex-direction: column; gap: 40px;
+  @include mobile { padding-top: 64px; padding-bottom: 64px; }
+}
+
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+.card {
+  background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+  padding: 28px; display: flex; flex-direction: column; gap: 10px;
+
+  h3 { font-size: 20px; font-weight: 500; }
+  p { font-size: 15px; color: var(--ink-soft); }
+  svg { width: 28px; height: 28px; fill: none; stroke: var(--green); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+}
+
+.quickfacts { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
+.quickfact {
+  display: flex; flex-direction: column; gap: 2px; padding: 16px 20px; background: var(--tint); border-radius: 12px;
+
+  &__label { font-size: 13px; color: var(--ink-soft); }
+  &__value { font-size: 17px; font-weight: 500; }
+}

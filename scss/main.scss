@@ -1,0 +1,26 @@
+// Mahidol x Harvard HSIL Hackathon — Thailand Hub landing page
+// Build: `npm run build` compiles this to css/styles.css (committed, so the site needs no build step to run).
+// Partials are imported in cascade order: tokens -> base -> layout -> components -> sections (page order).
+
+@use "base/tokens";
+@use "base/base";
+
+@use "layout/container";
+@use "layout/header";
+
+@use "components/eyebrow";
+@use "components/section-head";
+@use "components/placeholder";
+@use "components/buttons";
+
+@use "sections/hero";
+@use "sections/partners";
+@use "sections/benefits";
+@use "sections/about";
+@use "sections/pathway";
+@use "sections/archive";
+@use "sections/faq";
+@use "sections/notify";
+
+@use "layout/footer";
+@use "layout/m-bar";

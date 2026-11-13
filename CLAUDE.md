@@ -4,16 +4,34 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-A static landing page for the **Mahidol x Harvard HSIL Hackathon 2027 — Official Thailand Hub** (Mahidol University hosting Harvard T.H. Chan's Health Systems Innovation Lab hackathon). The copy is in Thai. There's no build step, framework or dependencies.
+A static landing page for the **Mahidol x Harvard HSIL Hackathon 2027 — Official Thailand Hub** (Mahidol University hosting Harvard T.H. Chan's Health Systems Innovation Lab hackathon). The copy is in Thai. There's no framework and no runtime dependencies. The only dev dependency is Sass, and the compiled CSS is committed, so the site runs without a build step.
 
 It was ported from the Claude Design canvas at https://claude.ai/artifact/BaNRDTtWKQRhPy5mDTynjh (artboard `project/Main.dc.html`). That canvas is the design source of truth. If the design changes there, port the change here.
 
 ## Files
 
 - `index.html`: all content and markup. Every section is static HTML, so the page works without JS.
-- `css/styles.css`: design tokens live on `:root` in two layers. Primitive scales (`--green-*`, `--teal-*`, `--red-*`, `--gray-*`) hold the raw hex values. Semantic aliases (`--ink`, `--green`, `--mint`, `--deep`, `--crimson`, …) point at them, and components use those. Put no raw hex outside `:root`. Components use BEM-style classes (`.hero__title`, `.step--boston`). The main breakpoint is `max-width: 720px`, and the sticky mobile CTA bar `.m-bar` only shows below it.
+- `scss/`: the stylesheet source. Edit these files, never `css/styles.css`. `npm run build` compiles `scss/main.scss` to `css/styles.css`, and the compiled file is committed so the site still runs without a build step. Always rebuild and commit both together.
+  - `abstracts/`: the breakpoint variables and the `tablet-down` / `mobile` mixins. This folder emits no CSS.
+  - `base/`: `_tokens.scss` (the `:root` custom properties) and `_base.scss` (reset, body, links).
+  - `layout/`: container, header and nav, footer, and the sticky mobile bar `.m-bar`.
+  - `components/`: reusable pieces (eyebrow, section-head, placeholder/todo, buttons).
+  - `sections/`: one partial per page section, in page order (hero, partners, benefits, about, pathway, archive, faq, notify).
+  - `main.scss` sets the cascade order: tokens, then base, layout, components, sections. A new partial goes into the matching folder and gets a `@use` line in `main.scss`.
+  - Tokens stay CSS custom properties, not Sass variables, because they change at runtime (`--gutter` on mobile, `--step-*` per variant). Primitive scales (`--green-*`, `--teal-*`, `--red-*`, `--gray-*`) hold the raw hex values. Semantic aliases (`--ink`, `--green`, `--mint`, `--deep`, `--crimson`, …) point at them, and components use those. Put no raw hex outside `base/_tokens.scss`.
+  - Components use BEM-style classes written with `&__element` / `&--modifier` nesting. Keep nesting to one or two levels. Put each media query inside the rule it changes (`@include mobile { … }`), not in a separate responsive file.
 - Hero: follows the client artwork `assets/aw/Harvard Hackathon 2027_ComingSoon.jpg`. The background is `assets/hero-bg.webp`, a 2400px copy of `assets/aw/Harvard Hackathon 2027_BG.jpg` (regenerate with `ffmpeg -i "assets/aw/Harvard Hackathon 2027_BG.jpg" -vf scale=2400:-1 -q:v 78 assets/hero-bg.webp`). The original artwork in `assets/aw/` is kept out of git because the files are large. The title and theme line use Hubot Sans, the artwork's font. Everything else stays in Kanit.
-- `js/main.js`: progressive enhancement only. It fills the countdown (`[data-days-left]`), swaps the CTA state, collapses the mobile nav behind `.nav-toggle`, badges the current pathway step and runs count-ups.
+- `js/main.js`: progressive enhancement only. It fills the countdown (`[data-days-left]`), swaps the CTA state, collapses the nav behind `.nav-toggle`, badges the current pathway step and runs count-ups.
+
+## Responsive
+
+The page has to work at every width from 360px to 1440px+, not just at the breakpoints.
+
+- There are two breakpoints. `max-width: 1023px` (tablet and below) collapses the nav behind `.nav-toggle`. `max-width: 720px` (mobile) shrinks the gutter to 16px and shows the sticky CTA bar `.m-bar`. Don't add a breakpoint for one component when fluid sizing can do the job.
+- Size display text with `clamp(min, vw, max)` so it scales smoothly. A fixed px size that jumps at a breakpoint overflows the widths in between. For example, the hero's "Hackathon 2027" is about 9.5em wide, so it uses `clamp(32px, 9vw, 100px)`.
+- Text that never wraps (`white-space: nowrap`, the hero title) must fit the narrowest viewport. `.hero` has `overflow: hidden`, so anything that overflows gets clipped without showing a scrollbar. Checking `scrollWidth` won't catch it.
+- Before calling a layout change done, check it at 390, 768, 1024 and 1440. For each width, confirm that no element's bounding box goes past the viewport edge and that the header stays on a single row. Then take a screenshot of the hero and any section you changed.
+- Grids should wrap without leaving a lone orphan card on the last row if that can be avoided. Tap targets are at least `var(--tap)` tall.
 
 ## Registration CTA switch
 
@@ -38,4 +56,12 @@ Open `index.html` directly, or serve the folder:
 
 ```
 python3 -m http.server 8000
+```
+
+To edit styles:
+
+```
+npm install
+npm run watch   # recompiles css/styles.css whenever an scss/ file changes
+npm run build   # one-off compile before committing
 ```

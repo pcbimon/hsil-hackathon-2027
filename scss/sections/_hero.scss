@@ -1,0 +1,62 @@
+@use "../abstracts" as *;
+
+// Follows the client artwork assets/aw/Harvard Hackathon 2027_ComingSoon.jpg
+.hero {
+  position: relative; overflow: hidden; color: var(--white);
+  background: var(--teal-850) url("../assets/hero-bg.webp") right bottom / cover no-repeat;
+  @include mobile { background-position: 70% bottom; }
+
+  &__inner {
+    padding-top: 80px; padding-bottom: 96px;
+    min-height: min(82vh, 760px); display: flex; align-items: center;
+    @include mobile { padding-top: 40px; padding-bottom: 56px; min-height: 0; }
+  }
+  &__copy { max-width: 760px; min-width: 0; display: flex; flex-direction: column; gap: 18px; }
+
+  &__eyebrow {
+    display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+    font-size: 18px; font-weight: 400;
+
+    &::before { content: ""; width: 6px; height: 24px; background: var(--crimson-bright); border-radius: 2px; }
+  }
+
+  // Title mirrors the artwork: chrome HSIL / Hackathon, mint 2027, orange flare under the baseline
+  &__title {
+    display: flex; flex-direction: column; line-height: 0.9; letter-spacing: -0.01em;
+    font-family: "Hubot Sans", Kanit, sans-serif; font-weight: 800;
+  }
+  // Fluid sizes: "Hackathon 2027" is ~9.5em wide and must fit any viewport, so scale with vw instead of jumping at breakpoints
+  &__title-main { font-size: clamp(64px, 16vw, 168px); }
+  &__title-sub {
+    position: relative; font-size: clamp(32px, 9vw, 100px); white-space: nowrap;
+
+    &::after {
+      content: ""; position: absolute; left: 12%; width: 70%; bottom: -0.02em; height: 0.18em;
+      background: radial-gradient(ellipse at 50% 50%, var(--white) 0%, var(--flare) 18%, transparent 70%);
+      mix-blend-mode: screen; pointer-events: none;
+    }
+  }
+  &__title-main, &__title-word {
+    background: linear-gradient(180deg, var(--white) 35%, var(--silver) 70%, var(--white) 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+    filter: drop-shadow(6px 6px 6px var(--title-shadow));
+  }
+  &__title-year { color: var(--mint-bright); filter: drop-shadow(6px 6px 3px var(--title-shadow)); }
+  &__theme { font-family: "Hubot Sans", Kanit, sans-serif; font-size: clamp(20px, 3vw, 30px); font-weight: 500; color: var(--mint-bright); text-wrap: balance; }
+
+  &__when {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; font-size: 22px; font-weight: 600;
+    @include mobile { font-size: 19px; }
+  }
+  &__countdown {
+    font-size: 14px; font-weight: 500; padding: 4px 12px; border-radius: var(--pill); border: 1px solid var(--mint); color: var(--mint);
+    &:empty { display: none; }
+  }
+  &__offer {
+    font-size: 22px; font-weight: 500; max-width: 600px; text-wrap: balance;
+    @include mobile { font-size: 19px; }
+  }
+
+  &__cta { display: flex; flex-direction: column; gap: 10px; margin-top: 6px; }
+  &__cta-note { font-size: 16px; font-weight: 500; }
+}

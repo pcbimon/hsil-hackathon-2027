@@ -1,0 +1,86 @@
+// Design tokens stay CSS custom properties: they change at runtime (--gutter on mobile, --step-* per variant).
+// Primitive scales hold raw hex; components only use the semantic names. No raw hex outside this file.
+@use "../abstracts" as *;
+
+:root {
+  // ---- Primitive: raw palette ----
+  --white: #FFFFFF;
+
+  // Green: brand green + mint highlight
+  --green-100: #DDF3EA;
+  --green-200: #BFE3D6;
+  --green-300: #A9E6CB;
+  --green-400: #7EF0B3;
+  --green-450: #53EF9E;  // artwork "2027" + theme line
+  --green-600: #0A7A5A;
+  --green-700: #075C44;
+  --green-950: #04312F;
+
+  // Teal: page tints, lines and the deep backgrounds
+  --teal-50:  #F2F7F5;
+  --teal-100: #E3EFEB;
+  --teal-200: #D7E6E1;
+  --teal-300: #C8DCD5;
+  --teal-400: #9DB8B0;
+  --teal-500: #5FA99C;
+  --teal-600: #3E8F7E;
+  --teal-700: #2F7A70;
+  --teal-800: #0B6B5A;
+  --teal-850: #06403F;
+  --teal-900: #06363A;
+  --teal-950: #032326;
+
+  // Red: Harvard crimson
+  --red-300: #FF9AA0;
+  --red-400: #FF5A63;
+  --red-600: #A51C30;
+  --red-950: #4A0B12;
+
+  // Gray: green-tinted text
+  --gray-150: #E6EAE9;
+  --gray-600: #48605B;
+  --gray-900: #0F2A2A;
+
+  // ---- Semantic: what components use ----
+  --ink: var(--gray-900);
+  --ink-soft: var(--gray-600);
+  --ground: var(--teal-50);
+  --surface: var(--white);
+  --tint: var(--teal-100);
+  --line: var(--teal-200);
+  --line-strong: var(--teal-300);
+  --placeholder: var(--teal-400);
+  --slot: var(--gray-150);            // empty logo slot
+
+  --green: var(--green-600);          // links, icons, primary button on light
+  --green-dark: var(--green-700);
+  --mint: var(--green-400);           // highlight + primary button on dark
+  --mint-bright: var(--green-450);
+  --silver: #C9D3D1;                  // bottom of the chrome title gradient
+  --flare: #FF9800;                   // lens flare under the title
+  --title-shadow: rgb(0 0 0 / 0.4);
+  --mint-soft: var(--green-300);
+  --mint-pale: var(--green-100);
+  --on-mint: var(--green-950);
+
+  --deep: var(--teal-900);
+  --deeper: var(--teal-950);
+  --deep-line: var(--teal-600);
+  --deep-divider: var(--teal-700);
+  --on-deep-muted: var(--green-200);
+  --overlay-deep: rgb(3 41 43 / 0.55);
+  --hover-on-dark: rgb(255 255 255 / 0.08);
+  --glow-crimson: rgb(255 90 99 / 0.28);
+
+  --crimson: var(--red-600);          // accent text on light grounds (7.2:1 on white)
+  --crimson-bright: var(--red-400);   // accent on dark grounds
+
+  // ---- Layout ----
+  --container: 1200px;
+  --gutter: 24px;
+  --radius: 14px;
+  --pill: 999px;
+  --tap: 44px;
+
+  @include mobile { --gutter: 16px; }
+}

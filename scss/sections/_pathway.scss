@@ -1,0 +1,43 @@
+@use "../abstracts" as *;
+
+// Bangkok -> Boston timeline. Step colours come from --step-* so each variant only swaps variables.
+.pathway {
+  background: var(--deep); color: var(--white);
+
+  &__inner {
+    padding-top: 96px; padding-bottom: 96px; display: flex; flex-direction: column; gap: 48px;
+    @include mobile { padding-top: 64px; padding-bottom: 64px; }
+  }
+  .section-head p { color: var(--on-deep-muted); }
+  &__footnote { font-size: 14px; color: var(--on-deep-muted); }
+}
+
+.steps {
+  list-style: none; margin: 0; padding: 0;
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px;
+}
+
+.step {
+  --step-bg: var(--surface); --step-border: var(--surface); --step-fg: var(--ink); --step-muted: var(--ink-soft);
+  position: relative;
+  display: flex; flex-direction: column; gap: 8px; padding: 20px 16px; border-radius: 12px;
+  background: var(--step-bg); border: 1px solid var(--step-border); color: var(--step-fg);
+
+  &--online { --step-bg: transparent; --step-border: var(--deep-divider); --step-fg: var(--white); --step-muted: var(--red-300); }
+  &--boston { --step-bg: var(--crimson-bright); --step-border: var(--crimson-bright); --step-fg: var(--deeper); --step-muted: var(--red-950); }
+  &--now { outline: 3px solid var(--mint); outline-offset: 3px; }
+
+  // "ถัดไป" badge, added by js/main.js
+  &__now {
+    position: absolute; top: -12px; left: 12px; padding: 1px 10px; border-radius: var(--pill);
+    background: var(--mint); color: var(--on-mint); font-size: 12px; font-weight: 600;
+  }
+  &__where, &__note { font-size: 13px; color: var(--step-muted); }
+  &__name { font-size: 18px; font-weight: 500; line-height: 1.3; }
+  &__date { font-size: 15px; font-weight: 400; }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .step--boston { animation: boston-glow 3s ease-in-out infinite; }
+}
+@keyframes boston-glow { 50% { box-shadow: 0 0 0 6px var(--glow-crimson); } }

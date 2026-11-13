@@ -1,0 +1,11 @@
+@use "../abstracts" as *;
+
+// Sticky registration CTA, mobile only
+.m-bar {
+  display: none; position: sticky; bottom: 0; z-index: 5;
+  background: var(--deeper); border-top: 1px solid var(--deep-divider);
+  padding: 10px 16px; gap: 12px; align-items: center; justify-content: space-between;
+  @include mobile { display: flex; }
+
+  &__date { font-size: 14px; color: var(--mint-pale); }
+}
