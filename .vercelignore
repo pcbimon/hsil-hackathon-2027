@@ -1,0 +1,4 @@
+# Keep project/tooling files off the public site
+CLAUDE.md
+.claude
+.impeccable
