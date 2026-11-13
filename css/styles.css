@@ -33,9 +33,6 @@
   --red-600: #A51C30;
   --red-950: #4A0B12;
 
-  /* Blue: secondary route lines on the hero map */
-  --blue-300: #9EC9FF;
-
   /* Gray: green-tinted text */
   --gray-600: #48605B;
   --gray-900: #0F2A2A;
@@ -146,15 +143,9 @@ h1, h2, h3, p, figure, blockquote { margin: 0; }
   display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px;
 }
 .brand { display: flex; align-items: center; gap: 14px; }
-.brand__logo {
-  width: 44px; height: 44px; border-radius: 8px; display: grid; place-items: center;
-  background: var(--deep); color: var(--mint); font-size: 13px; font-weight: 700; letter-spacing: 0.02em;
-}
-.brand__logo--crimson { background: var(--crimson); color: var(--white); font-size: 11px; }
+.brand__seal { width: 44px; height: 44px; flex: none; }
+.brand__partner { height: 32px; width: auto; flex: none; }
 .brand__x { font-size: 18px; color: var(--crimson); font-weight: 600; }
-.brand__name { display: flex; flex-direction: column; line-height: 1.25; }
-.brand__title { font-weight: 600; font-size: 15px; }
-.brand__sub { font-size: 12px; color: var(--ink-soft); }
 
 
 .main-nav { display: flex; flex-wrap: wrap; align-items: center; gap: 22px; font-size: 15px; font-weight: 400; }
@@ -186,8 +177,13 @@ h1, h2, h3, p, figure, blockquote { margin: 0; }
   display: flex; flex-wrap: wrap; gap: 40px; align-items: center;
 }
 .hero__copy { flex: 1 1 520px; min-width: 0; display: flex; flex-direction: column; gap: 18px; }
-.hero__map { flex: 1 1 420px; min-width: 0; display: flex; justify-content: center; }
-.hero__map svg { width: 100%; max-width: 580px; height: auto; }
+.hero__scene {
+  flex: 1 1 420px; min-width: 0; align-self: stretch; position: relative;
+  /* reach left under the copy so the scene centre lands near 65% of the hero; the mask keeps text clear */
+  margin-left: -26%; min-height: 520px;
+  mask-image: linear-gradient(to right, transparent 8%, black 38%);
+}
+.hero__scene canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
 
 .hero__eyebrow {
   display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
@@ -198,29 +194,17 @@ h1, h2, h3, p, figure, blockquote { margin: 0; }
 .hero__title { display: flex; flex-direction: column; line-height: 0.95; letter-spacing: -0.02em; font-weight: 700; }
 .hero__title-main { font-size: 64px; }
 .hero__title-year { font-size: 96px; color: var(--mint); }
+.hero__theme { font-size: 20px; font-weight: 500; color: var(--mint); opacity: 0.85; max-width: 560px; margin-top: -6px; text-wrap: balance; }
 
-.hero__edition { font-size: 17px; font-weight: 500; color: var(--mint); }
 .hero__when { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; font-size: 22px; font-weight: 600; }
 .hero__countdown { font-size: 14px; font-weight: 500; padding: 4px 12px; border-radius: var(--pill); border: 1px solid var(--mint); color: var(--mint); }
 .hero__countdown:empty { display: none; }
 .hero__offer { font-size: 22px; font-weight: 500; max-width: 600px; text-wrap: balance; }
-.hero__lead { font-size: 17px; color: var(--mint-pale); max-width: 600px; }
-.hero__partner { font-size: 14px; color: var(--on-deep-muted); letter-spacing: 0.02em; }
 
 .hero__cta { display: flex; flex-direction: column; gap: 10px; margin-top: 6px; }
 .hero__cta-note { font-size: 16px; font-weight: 500; }
-.hero__archive-link {
-  color: var(--mint-soft); font-size: 15px; text-underline-offset: 4px;
-  align-self: flex-start; min-height: var(--tap); display: inline-flex; align-items: center;
-}
-.hero__archive-link:hover { color: var(--white); }
 
 @media (prefers-reduced-motion: no-preference) {
-  .bkk-pulse { transform-box: fill-box; transform-origin: center; animation: bkk 2.4s ease-out infinite; }
-  @keyframes bkk { 0% { transform: scale(0.6); opacity: 1; } 100% { transform: scale(2.4); opacity: 0; } }
-  /* dots flow outward from Bangkok; dasharray period is 8 */
-  .routes path { animation: route-flow 1.2s linear infinite; }
-  @keyframes route-flow { to { stroke-dashoffset: -8; } }
   .step--boston { animation: boston-glow 3s ease-in-out infinite; }
   @keyframes boston-glow { 50% { box-shadow: 0 0 0 6px var(--glow-crimson); } }
 }
@@ -241,6 +225,10 @@ h1, h2, h3, p, figure, blockquote { margin: 0; }
   border: 1px solid var(--line); border-radius: 10px; font-size: 16px; font-weight: 600; color: var(--deep);
 }
 .wordmark--crimson { color: var(--crimson); }
+.wordmark--logo { padding-top: 6px; padding-bottom: 6px; }
+.wordmark--logo img { display: block; height: 40px; width: auto; max-width: 100%; }
+/* the official Mahidol PNG has wide built-in margins; enlarge it and pull the margins back */
+.wordmark--logo .wordmark__img--padded { height: 62px; margin: -11px -14px; }
 .wordmark--light { font-weight: 400; color: var(--ink-soft); font-size: 14px; }
 
 .press { background: var(--tint); border-bottom: 1px solid var(--line); }
@@ -441,7 +429,8 @@ h1, h2, h3, p, figure, blockquote { margin: 0; }
   .m-bar { display: flex; }
   .main-nav { gap: 12px 18px; }
   .brand { flex: 1 1 0; min-width: 0; gap: 10px; }
-  .brand__logo { width: 36px; height: 36px; }
+  .brand__seal { width: 36px; height: 36px; }
+  .brand__partner { height: 22px; }
   .has-nav-toggle .nav-toggle { display: grid; }
   .has-nav-toggle .main-nav { display: none; }
   .has-nav-toggle.is-nav-open .main-nav { display: flex; flex-direction: column; align-items: stretch; gap: 0; width: 100%; }
@@ -451,6 +440,8 @@ h1, h2, h3, p, figure, blockquote { margin: 0; }
   .hero__inner { padding-top: 40px; padding-bottom: 56px; }
   .hero__title-main { font-size: 44px; }
   .hero__title-year { font-size: 72px; }
+  .hero__theme { font-size: 18px; }
+  .hero__scene { margin-left: 0; min-height: 360px; mask-image: none; }
   .hero__when, .hero__offer { font-size: 19px; }
   .section-head h2 { font-size: 30px; }
   .about, .pathway__inner, .faq { padding-top: 64px; padding-bottom: 64px; }

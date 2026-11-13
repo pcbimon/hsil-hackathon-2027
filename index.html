@@ -10,19 +10,17 @@
 <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/styles.css">
 <script src="js/main.js" defer></script>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js"}}</script>
+<script type="module" src="js/hero-scene.js"></script>
 </head>
 <body>
 
 <header class="site-header">
   <div class="container site-header__inner">
     <div class="brand">
-      <div class="brand__logo" data-mock>MU</div>
+      <img class="brand__seal" src="assets/logos/mahidol-seal.svg" alt="ตรามหาวิทยาลัยมหิดล" width="44" height="44">
       <span class="brand__x">×</span>
-      <div class="brand__logo brand__logo--crimson" data-mock>HSIL</div>
-      <div class="brand__name">
-        <span class="brand__title">HSIL Hackathon · Thailand Hub</span>
-        <span class="brand__sub">Mahidol University × Harvard HSIL</span>
-      </div>
+      <img class="brand__partner" src="assets/logos/harvard-chan.svg" alt="Harvard T.H. Chan School of Public Health" width="389" height="66">
     </div>
     <button type="button" class="nav-toggle" aria-controls="main-nav" aria-expanded="false" aria-label="เปิดเมนู">
       <svg aria-hidden="true" viewBox="0 0 24 24"><path class="nav-toggle__open" d="M4 7h16M4 12h16M4 17h16"/><path class="nav-toggle__close" d="M6 6l12 12M18 6L6 18"/></svg>
@@ -49,51 +47,27 @@
         <span class="hero__title-main">HSIL HACKATHON</span>
         <span class="hero__title-year">2027</span>
       </h1>
-      <p class="hero__edition">ครั้งที่ 8 ระดับโลก · ครั้งที่ 2 ในประเทศไทย</p>
+      <p class="hero__theme" lang="en">Building High-Value Health Systems: Leveraging AI</p>
       <p class="hero__when">16–17 เม.ย. 2570 (2027) · กรุงเทพฯ <span class="hero__countdown" data-days-left></span></p>
       <p class="hero__offer">ทีมที่ชนะได้พัฒนาผลงานต่อกับ Harvard จนถึง Demo Day ที่ Boston</p>
-      <p class="hero__lead">งานแข่ง AI เพื่อระบบสุขภาพที่จัดพร้อมกันทั่วโลก แข่งที่กรุงเทพฯ 2 วัน หัวข้อปีนี้ <span lang="en">Building High-Value Health Systems: Leveraging AI</span></p>
       <div id="top" class="hero__cta">
         <span class="hero__cta-note" data-cta-note>เปิดรับสมัคร ธ.ค. 2569 – กลาง ก.พ. 2570</span>
         <div class="btn-row">
           <a class="btn btn--mint" data-cta="label" href="#">บันทึกวันแข่งลงปฏิทิน</a>
           <a class="btn btn--ghost" href="#pathway">ดูเส้นทางสู่ Boston</a>
         </div>
-        <a class="hero__archive-link" href="#archive">ดูผลงานของปีแรก 2569 (2026) →</a>
       </div>
-      <p class="hero__partner">Global partner · Harvard T.H. Chan School of Public Health, Health Systems Innovation Lab</p>
     </div>
-    <div class="hero__map">
-      <svg role="img" aria-label="แผนที่ประเทศไทย มีเส้นโยงจากกรุงเทพฯ ไปยัง hub อื่นทั่วโลก" viewBox="0 0 640 640">
-        <defs><pattern id="thdots" width="9" height="9" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.8" style="fill: var(--mint)"/></pattern></defs>
-        <path d="M109 72 L136 60 L170 45 L193 53 L216 79 L212 117 L235 140 L273 140 L303 121 L326 136 L353 159 L356 197 L387 228 L379 273 L345 273 L288 277 L265 304 L273 345 L284 376 L261 357 L242 338 L212 338 L208 311 L193 307 L174 315 L170 342 L159 380 L144 425 L147 467 L170 471 L185 505 L193 543 L212 558 L231 566 L242 585 L216 592 L197 573 L178 573 L163 558 L147 532 L121 505 L109 509 L113 475 L125 429 L128 402 L140 368 L155 334 L144 311 L121 277 L113 250 L121 220 L128 197 L94 159 L83 121 L98 83 Z" fill="url(#thdots)" stroke-width="1.5" stroke-linejoin="round" opacity="0.95" style="stroke: var(--mint)"/>
-        <g class="routes" fill="none" stroke-width="2" stroke-dasharray="1 7" stroke-linecap="round">
-          <path d="M193 298 Q460 90 590 70" style="stroke: var(--mint)"/>
-          <path d="M193 298 Q300 60 430 36" style="stroke: var(--blue-300)"/>
-          <path d="M193 298 Q470 360 600 560" style="stroke: var(--blue-300)"/>
-          <path d="M193 298 Q400 250 560 330" style="stroke: var(--mint)"/>
-        </g>
-        <g font-family="Kanit, sans-serif" font-size="22" font-weight="500" letter-spacing="1.5" style="fill: var(--mint-pale)">
-          <circle cx="590" cy="70" r="8" stroke-width="3" style="fill: var(--deep); stroke: var(--mint)"/><text x="578" y="62" text-anchor="end">BOSTON</text>
-          <circle cx="430" cy="36" r="8" stroke-width="3" style="fill: var(--deep); stroke: var(--blue-300)"/><text x="442" y="24">LONDON</text>
-          <circle cx="600" cy="560" r="8" stroke-width="3" style="fill: var(--deep); stroke: var(--blue-300)"/><text x="590" y="548" text-anchor="end">SYDNEY</text>
-          <circle cx="560" cy="330" r="8" stroke-width="3" style="fill: var(--deep); stroke: var(--mint)"/><text x="546" y="314" text-anchor="end">+ 56 HUBS ทั่วโลก</text>
-        </g>
-        <circle class="bkk-pulse" cx="193" cy="298" r="22" fill="none" stroke-width="2" style="stroke: var(--crimson-bright)"/>
-        <circle cx="193" cy="298" r="40" fill="none" stroke-width="1" opacity="0.4" style="stroke: var(--crimson-bright)"/>
-        <circle cx="193" cy="298" r="11" stroke-width="3" style="fill: var(--crimson-bright); stroke: var(--white)"/>
-        <text x="167" y="304" text-anchor="end" font-family="Kanit, sans-serif" font-size="30" font-weight="700" letter-spacing="1" style="fill: var(--white); stroke: var(--deep); stroke-width: 6px; paint-order: stroke">BANGKOK</text>
-      </svg>
-    </div>
+    <div class="hero__scene" aria-hidden="true"></div>
   </div>
 </section>
 
 <section class="partners" aria-label="ผู้จัดและเครือข่าย">
   <div class="container partners__inner">
     <div class="partners__groups">
-      <div class="partners__group"><span class="partners__label">HOST</span><div class="partners__logos"><div class="wordmark" data-mock>Mahidol University</div></div></div>
-      <div class="partners__group"><span class="partners__label">GLOBAL PARTNER</span><div class="partners__logos"><div class="wordmark wordmark--crimson" data-mock>Harvard HSIL</div></div></div>
-      <div class="partners__group"><span class="partners__label">STRATEGIC PARTNER</span><div class="partners__logos"><div class="wordmark" data-mock>NIA</div></div></div>
+      <div class="partners__group"><span class="partners__label">HOST</span><div class="partners__logos"><div class="wordmark wordmark--logo"><img class="wordmark__img--padded" src="assets/logos/mahidol-th-en.png" alt="มหาวิทยาลัยมหิดล Mahidol University" width="1380" height="456"></div></div></div>
+      <div class="partners__group"><span class="partners__label">GLOBAL PARTNER</span><div class="partners__logos"><div class="wordmark wordmark--logo"><img src="assets/logos/harvard-chan.svg" alt="Harvard T.H. Chan School of Public Health" width="389" height="66"></div></div></div>
+      <div class="partners__group"><span class="partners__label">STRATEGIC PARTNER</span><div class="partners__logos"><div class="wordmark wordmark--logo"><img src="assets/logos/nia.svg" alt="สำนักงานนวัตกรรมแห่งชาติ (NIA)" width="342" height="156"></div></div></div>
       <div class="partners__group"><span class="partners__label">SPONSORS</span><div class="partners__logos"><div class="wordmark wordmark--light" data-mock>Siam MedTech</div><div class="wordmark wordmark--light" data-mock>Bangkok Health Ventures</div></div></div>
     </div>
     <div class="stats">
@@ -120,7 +94,7 @@
   <div class="section-head">
     <span class="eyebrow">WHO SHOULD JOIN</span>
     <h2>ใครก็ได้ที่อยากใช้ AI ทำให้ระบบสุขภาพดีขึ้น</h2>
-    <p>นักศึกษา แพทย์และบุคลากรสุขภาพ นักวิจัย วิศวกร นักออกแบบ นักนโยบาย ผู้ประกอบการ และอาจารย์ สมัครเป็นทีมหรือมาคนเดียวก็ได้</p>
+    <p>นักศึกษา แพทย์และบุคลากรสุขภาพ นักวิจัย วิศวกร นักออกแบบ นักนโยบาย ผู้ประกอบการ และอาจารย์ สมัครเป็นทีมหรือมาคนเดียวก็ได้ ปีนี้เป็นครั้งที่ 8 ระดับโลกและครั้งที่ 2 ในประเทศไทย</p>
   </div>
   <div class="cards">
     <div class="card">
