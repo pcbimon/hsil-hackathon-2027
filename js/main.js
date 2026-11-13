@@ -15,7 +15,7 @@ const CALENDAR_URL =
 
 const CTA = REGISTRATION_OPEN
   ? { href: APPLY_URL || '#', label: 'สมัครเข้าร่วม Hackathon', short: 'สมัครเลย', note: 'เปิดรับสมัครแล้ว ถึงกลาง ก.พ. 2570' }
-  : { href: CALENDAR_URL, label: 'เพิ่มวันแข่งลงปฏิทิน', short: 'บันทึกวันแข่ง', note: 'เปิดรับสมัคร ธ.ค. 2569 – กลาง ก.พ. 2570' };
+  : { href: CALENDAR_URL, label: 'บันทึกวันแข่งลงปฏิทิน', short: 'บันทึกวันแข่ง', note: 'เปิดรับสมัคร ธ.ค. 2569 – กลาง ก.พ. 2570' };
 
 function daysUntil(targetMs, nowMs) {
   return Math.max(0, Math.ceil((targetMs - nowMs) / MS_PER_DAY));
@@ -34,7 +34,7 @@ function applyCta(cta) {
 
 function renderCountdown() {
   const el = document.querySelector('[data-days-left]');
-  if (el) el.textContent = `${daysUntil(HACKATHON_START_UTC, Date.now())} วัน`;
+  if (el) el.textContent = `อีก ${daysUntil(HACKATHON_START_UTC, Date.now())} วัน`;
 }
 
 const COUNT_UP_MS = 1200;
@@ -85,7 +85,24 @@ function setupCountUps() {
   });
 }
 
+// The menu only collapses once JS runs, so the no-JS page keeps the full nav.
+function setupNavToggle() {
+  const header = document.querySelector('.site-header');
+  const toggle = header && header.querySelector('.nav-toggle');
+  if (!toggle) return;
+  const setOpen = (open) => {
+    header.classList.toggle('is-nav-open', open);
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.setAttribute('aria-label', open ? 'ปิดเมนู' : 'เปิดเมนู');
+  };
+  header.classList.add('has-nav-toggle');
+  setOpen(false);
+  toggle.addEventListener('click', () => setOpen(!header.classList.contains('is-nav-open')));
+  header.querySelectorAll('.main-nav a').forEach((a) => a.addEventListener('click', () => setOpen(false)));
+}
+
 applyCta(CTA);
+setupNavToggle();
 renderCountdown();
 markCurrentStep(Date.now());
 setupCountUps();

@@ -24,7 +24,10 @@
         <span class="brand__sub">Mahidol University × Harvard HSIL</span>
       </div>
     </div>
-    <nav class="main-nav" aria-label="เมนูหลัก">
+    <button type="button" class="nav-toggle" aria-controls="main-nav" aria-expanded="false" aria-label="เปิดเมนู">
+      <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+    <nav id="main-nav" class="main-nav" aria-label="เมนูหลัก">
       <a href="#about">เกี่ยวกับ</a>
       <a href="#pathway">เส้นทางสู่ Boston</a>
       <a href="#archive">ผลงาน 2026</a>
@@ -41,39 +44,24 @@
 <section class="hero">
   <div class="container hero__inner">
     <div class="hero__copy">
-      <div class="hero__badges">
-        <div class="hero__lockup" data-mock><strong>Mahidol University</strong><span>×</span><strong>Harvard HSIL</strong></div>
-        <span class="hero__hub-tag">ครั้งที่ 2 ในประเทศไทย</span>
-      </div>
-      <div class="hero__school">
-        <span class="hero__school-bar"></span>
-        <span class="hero__school-name">OFFICIAL THAILAND HUB</span>
-        <span class="hero__school-lab">มหาวิทยาลัยมหิดล · กรุงเทพฯ</span>
-      </div>
+      <p class="hero__eyebrow">Official Thailand Hub <span>· มหาวิทยาลัยมหิดล</span></p>
       <h1 class="hero__title">
         <span class="hero__title-main">HSIL HACKATHON</span>
         <span class="hero__title-year">2027</span>
       </h1>
-      <div class="hero__edition">
-        <span class="hero__edition-text">8TH EDITION</span>
-        <span class="hero__edition-rule"></span>
-      </div>
-      <p class="hero__partner">Global partner · Harvard T.H. Chan School of Public Health, Health Systems Innovation Lab</p>
-      <p class="hero__theme">Building High-Value Health Systems: Leveraging AI</p>
-      <p class="hero__lead">งานแข่ง AI เพื่อระบบสุขภาพที่จัดพร้อมกันทั่วโลก แข่งที่กรุงเทพฯ 2 วัน ทีมที่ชนะได้พัฒนาผลงานต่อกับ Harvard ไปจนถึง Demo Day ที่ Boston</p>
+      <p class="hero__edition">ครั้งที่ 8 ระดับโลก · ครั้งที่ 2 ในประเทศไทย</p>
+      <p class="hero__when">16–17 เม.ย. 2570 (2027) · กรุงเทพฯ <span class="hero__countdown" data-days-left></span></p>
+      <p class="hero__offer">ทีมที่ชนะได้พัฒนาผลงานต่อกับ Harvard จนถึง Demo Day ที่ Boston</p>
+      <p class="hero__lead">งานแข่ง AI เพื่อระบบสุขภาพที่จัดพร้อมกันทั่วโลก แข่งที่กรุงเทพฯ 2 วัน หัวข้อปีนี้ <span lang="en">Building High-Value Health Systems: Leveraging AI</span></p>
       <div id="top" class="hero__cta">
         <span class="hero__cta-note" data-cta-note>เปิดรับสมัคร ธ.ค. 2569 – กลาง ก.พ. 2570</span>
         <div class="btn-row">
-          <a class="btn btn--mint" data-cta="label" href="#">เพิ่มวันแข่งลงปฏิทิน</a>
+          <a class="btn btn--mint" data-cta="label" href="#">บันทึกวันแข่งลงปฏิทิน</a>
           <a class="btn btn--ghost" href="#pathway">ดูเส้นทางสู่ Boston</a>
         </div>
         <a class="hero__archive-link" href="#archive">ดูผลงานของปีแรก 2569 (2026) →</a>
       </div>
-      <div class="keyfacts">
-        <div class="keyfacts__item"><span class="keyfacts__label">อีกกี่วันถึงวันแข่ง</span><span class="keyfacts__value--big" data-days-left>– วัน</span></div>
-        <div class="keyfacts__item"><span class="keyfacts__label">Hackathon</span><span class="keyfacts__value">16–17 เม.ย. 2570 (2027)</span></div>
-        <div class="keyfacts__item"><span class="keyfacts__label">รับสมัคร</span><span class="keyfacts__value">ธ.ค. 2569 – กลาง ก.พ. 2570</span></div>
-      </div>
+      <p class="hero__partner">Global partner · Harvard T.H. Chan School of Public Health, Health Systems Innovation Lab</p>
     </div>
     <div class="hero__map">
       <svg role="img" aria-label="แผนที่ประเทศไทย มีเส้นโยงจากกรุงเทพฯ ไปยัง hub อื่นทั่วโลก" viewBox="0 0 640 640">
@@ -85,18 +73,16 @@
           <path d="M193 298 Q470 360 600 560" style="stroke: var(--blue-300)"/>
           <path d="M193 298 Q400 250 560 330" style="stroke: var(--mint)"/>
         </g>
-        <g font-family="Kanit, sans-serif" font-size="14" font-weight="500" letter-spacing="1.5" style="fill: var(--mint-pale)">
-          <circle cx="590" cy="70" r="6" stroke-width="2.5" style="fill: var(--deep); stroke: var(--mint)"/><text x="580" y="58" text-anchor="end">BOSTON</text>
-          <circle cx="430" cy="36" r="6" stroke-width="2.5" style="fill: var(--deep); stroke: var(--blue-300)"/><text x="442" y="24">LONDON</text>
-          <circle cx="600" cy="560" r="6" stroke-width="2.5" style="fill: var(--deep); stroke: var(--blue-300)"/><text x="590" y="548" text-anchor="end">SYDNEY</text>
-          <circle cx="560" cy="330" r="6" stroke-width="2.5" style="fill: var(--deep); stroke: var(--mint)"/><text x="550" y="318" text-anchor="end">+ 56 HUBS ทั่วโลก</text>
+        <g font-family="Kanit, sans-serif" font-size="22" font-weight="500" letter-spacing="1.5" style="fill: var(--mint-pale)">
+          <circle cx="590" cy="70" r="8" stroke-width="3" style="fill: var(--deep); stroke: var(--mint)"/><text x="578" y="62" text-anchor="end">BOSTON</text>
+          <circle cx="430" cy="36" r="8" stroke-width="3" style="fill: var(--deep); stroke: var(--blue-300)"/><text x="442" y="24">LONDON</text>
+          <circle cx="600" cy="560" r="8" stroke-width="3" style="fill: var(--deep); stroke: var(--blue-300)"/><text x="590" y="548" text-anchor="end">SYDNEY</text>
+          <circle cx="560" cy="330" r="8" stroke-width="3" style="fill: var(--deep); stroke: var(--mint)"/><text x="546" y="314" text-anchor="end">+ 56 HUBS ทั่วโลก</text>
         </g>
         <circle class="bkk-pulse" cx="193" cy="298" r="22" fill="none" stroke-width="2" style="stroke: var(--crimson-bright)"/>
         <circle cx="193" cy="298" r="40" fill="none" stroke-width="1" opacity="0.4" style="stroke: var(--crimson-bright)"/>
         <circle cx="193" cy="298" r="11" stroke-width="3" style="fill: var(--crimson-bright); stroke: var(--white)"/>
-        <text x="167" y="304" text-anchor="end" font-family="Kanit, sans-serif" font-size="22" font-weight="700" letter-spacing="1" style="fill: var(--white)">BANGKOK</text>
-        <text x="167" y="326" text-anchor="end" font-family="Kanit, sans-serif" font-size="14" font-weight="400" style="fill: var(--on-deep-muted)">13.75°N · 100.50°E</text>
-        <text x="300" y="470" font-family="Kanit, sans-serif" font-size="56" font-weight="700" letter-spacing="2" opacity="0.18" style="fill: var(--mint)">THAILAND</text>
+        <text x="167" y="304" text-anchor="end" font-family="Kanit, sans-serif" font-size="30" font-weight="700" letter-spacing="1" style="fill: var(--white); stroke: var(--deep); stroke-width: 6px; paint-order: stroke">BANGKOK</text>
       </svg>
     </div>
   </div>
@@ -313,7 +299,7 @@
       <h2>พร้อมพาไอเดียจากไทยไปถึง Boston หรือยัง</h2>
       <p><span data-cta-note>เปิดรับสมัคร ธ.ค. 2569 – กลาง ก.พ. 2570</span> มีคำถาม ติดต่อทีม Thailand Hub ได้ตามช่องทางด้านข้าง</p>
       <div class="btn-row">
-        <a class="btn btn--mint" data-cta="label" href="#">เพิ่มวันแข่งลงปฏิทิน</a>
+        <a class="btn btn--mint" data-cta="label" href="#">บันทึกวันแข่งลงปฏิทิน</a>
         <a class="btn btn--ghost" href="#pathway">ดูเส้นทางสู่ Boston</a>
       </div>
     </div>
@@ -333,7 +319,7 @@
     <div class="site-footer__col">
       <span class="site-footer__brand">Mahidol x Harvard HSIL Hackathon</span>
       <span>Official Thailand Hub ของ Harvard Health Systems Innovation Lab Hackathon จัดโดยมหาวิทยาลัยมหิดล</span>
-      <a class="btn btn--mint btn--small" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Mahidol%20x%20Harvard%20HSIL%20Hackathon%202027&amp;dates=20270416/20270418&amp;location=Mahidol%20University%2C%20Bangkok">เพิ่มวันแข่งลงปฏิทิน</a>
+      <a class="btn btn--mint btn--small" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Mahidol%20x%20Harvard%20HSIL%20Hackathon%202027&amp;dates=20270416/20270418&amp;location=Mahidol%20University%2C%20Bangkok">บันทึกวันแข่งลงปฏิทิน</a>
     </div>
     <div class="site-footer__col">
       <span class="site-footer__heading">ข่าวปี 2569 (2026)</span>
