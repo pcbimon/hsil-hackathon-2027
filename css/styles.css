@@ -167,6 +167,8 @@ h1, h2, h3, p, figure, blockquote { margin: 0; }
   border: 1px solid var(--line-strong); border-radius: 10px; background: var(--surface); color: var(--ink); cursor: pointer;
 }
 .nav-toggle svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; }
+.nav-toggle__close, .nav-toggle[aria-expanded="true"] .nav-toggle__open { display: none; }
+.nav-toggle[aria-expanded="true"] .nav-toggle__close { display: inline; }
 .lang-toggle {
   font: inherit; font-size: 13px; padding: 8px 12px; min-height: var(--tap);
   border: 1px solid var(--line-strong); background: var(--surface); border-radius: var(--pill);
@@ -442,7 +444,9 @@ h1, h2, h3, p, figure, blockquote { margin: 0; }
   .brand__logo { width: 36px; height: 36px; }
   .has-nav-toggle .nav-toggle { display: grid; }
   .has-nav-toggle .main-nav { display: none; }
-  .has-nav-toggle.is-nav-open .main-nav { display: flex; flex-direction: column; align-items: flex-start; width: 100%; }
+  .has-nav-toggle.is-nav-open .main-nav { display: flex; flex-direction: column; align-items: stretch; gap: 0; width: 100%; }
+  .is-nav-open .main-nav a:not(.btn) { display: flex; align-items: center; min-height: var(--tap); border-bottom: 1px solid var(--line); }
+  .is-nav-open .lang-toggle { align-self: flex-start; margin-top: 12px; }
   .main-nav .btn { display: none; } /* the sticky .m-bar carries this CTA on mobile */
   .hero__inner { padding-top: 40px; padding-bottom: 56px; }
   .hero__title-main { font-size: 44px; }
