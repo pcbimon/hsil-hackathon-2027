@@ -9,6 +9,7 @@
   --green-200: #BFE3D6;
   --green-300: #A9E6CB;
   --green-400: #7EF0B3;
+  --green-450: #53EF9E;  /* artwork "2027" + theme line */
   --green-600: #0A7A5A;
   --green-700: #075C44;
   --green-950: #04312F;
@@ -34,6 +35,7 @@
   --red-950: #4A0B12;
 
   /* Gray: green-tinted text */
+  --gray-150: #E6EAE9;
   --gray-600: #48605B;
   --gray-900: #0F2A2A;
 
@@ -46,10 +48,15 @@
   --line: var(--teal-200);
   --line-strong: var(--teal-300);
   --placeholder: var(--teal-400);
+  --slot: var(--gray-150);             /* empty logo slot */
 
   --green: var(--green-600);          /* links, icons, primary button on light */
   --green-dark: var(--green-700);
   --mint: var(--green-400);           /* highlight + primary button on dark */
+  --mint-bright: var(--green-450);
+  --silver: #C9D3D1;                  /* bottom of the chrome title gradient */
+  --flare: #FF9800;                   /* lens flare under the title */
+  --title-shadow: rgb(0 0 0 / 0.4);
   --mint-soft: var(--green-300);
   --mint-pale: var(--green-100);
   --on-mint: var(--green-950);
@@ -170,31 +177,39 @@ h1, h2, h3, p, figure, blockquote { margin: 0; }
 
 .hero {
   position: relative; overflow: hidden; color: var(--white);
-  background: linear-gradient(135deg, var(--teal-950) 0%, var(--teal-850) 45%, var(--teal-800) 100%);
+  background: var(--teal-850) url("../assets/hero-bg.webp") right bottom / cover no-repeat;
 }
 .hero__inner {
   padding-top: 80px; padding-bottom: 96px;
-  display: flex; flex-wrap: wrap; gap: 40px; align-items: center;
+  min-height: min(82vh, 760px); display: flex; align-items: center;
 }
-.hero__copy { flex: 1 1 520px; min-width: 0; display: flex; flex-direction: column; gap: 18px; }
-.hero__scene {
-  flex: 1 1 420px; min-width: 0; align-self: stretch; position: relative;
-  /* reach left under the copy so the scene centre lands near 65% of the hero; the mask keeps text clear */
-  margin-left: -26%; min-height: 520px;
-  mask-image: linear-gradient(to right, transparent 8%, black 38%);
-}
-.hero__scene canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+.hero__copy { max-width: 760px; min-width: 0; display: flex; flex-direction: column; gap: 18px; }
 
 .hero__eyebrow {
   display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
-  font-size: 16px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase;
+  font-size: 18px; font-weight: 400;
 }
 .hero__eyebrow::before { content: ""; width: 6px; height: 24px; background: var(--crimson-bright); border-radius: 2px; }
 
-.hero__title { display: flex; flex-direction: column; line-height: 0.95; letter-spacing: -0.02em; font-weight: 700; }
-.hero__title-main { font-size: 64px; }
-.hero__title-year { font-size: 96px; color: var(--mint); }
-.hero__theme { font-size: 20px; font-weight: 500; color: var(--mint); opacity: 0.85; max-width: 560px; margin-top: -6px; text-wrap: balance; }
+/* Title mirrors the "Coming Soon" artwork: chrome HSIL / Hackathon, mint 2027, orange flare under the baseline */
+.hero__title {
+  display: flex; flex-direction: column; line-height: 0.9; letter-spacing: -0.01em;
+  font-family: "Hubot Sans", Kanit, sans-serif; font-weight: 800;
+}
+.hero__title-main { font-size: 168px; }
+.hero__title-sub { position: relative; font-size: 100px; white-space: nowrap; }
+.hero__title-main, .hero__title-word {
+  background: linear-gradient(180deg, var(--white) 35%, var(--silver) 70%, var(--white) 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  filter: drop-shadow(6px 6px 6px var(--title-shadow));
+}
+.hero__title-year { color: var(--mint-bright); filter: drop-shadow(6px 6px 3px var(--title-shadow)); }
+.hero__title-sub::after {
+  content: ""; position: absolute; left: 12%; width: 70%; bottom: -0.02em; height: 0.18em;
+  background: radial-gradient(ellipse at 50% 50%, var(--white) 0%, var(--flare) 18%, transparent 70%);
+  mix-blend-mode: screen; pointer-events: none;
+}
+.hero__theme { font-family: "Hubot Sans", Kanit, sans-serif; font-size: 30px; font-weight: 500; color: var(--mint-bright); text-wrap: balance; }
 
 .hero__when { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; font-size: 22px; font-weight: 600; }
 .hero__countdown { font-size: 14px; font-weight: 500; padding: 4px 12px; border-radius: var(--pill); border: 1px solid var(--mint); color: var(--mint); }
@@ -219,17 +234,20 @@ h1, h2, h3, p, figure, blockquote { margin: 0; }
 .partners__groups { flex: 999 1 600px; min-width: 0; display: flex; flex-wrap: wrap; gap: 28px; }
 .partners__group { display: flex; flex-direction: column; gap: 10px; }
 .partners__label { font-size: 12px; font-weight: 500; letter-spacing: 0.14em; color: var(--ink-soft); }
-.partners__logos { display: flex; flex-wrap: wrap; gap: 10px; }
+.partners__logos { display: flex; flex-wrap: wrap; gap: 10px 32px; }
 .wordmark {
-  height: 56px; min-width: 132px; padding: 0 18px; display: flex; align-items: center; justify-content: center;
-  border: 1px solid var(--line); border-radius: 10px; font-size: 16px; font-weight: 600; color: var(--deep);
+  height: 56px; display: flex; align-items: center;
+  font-size: 16px; font-weight: 600; color: var(--deep);
 }
 .wordmark--crimson { color: var(--crimson); }
-.wordmark--logo { padding-top: 6px; padding-bottom: 6px; }
+.wordmark--logo { padding: 6px 0; }
 .wordmark--logo img { display: block; height: 40px; width: auto; max-width: 100%; }
 /* the official Mahidol PNG has wide built-in margins; enlarge it and pull the margins back */
-.wordmark--logo .wordmark__img--padded { height: 62px; margin: -11px -14px; }
-.wordmark--light { font-weight: 400; color: var(--ink-soft); font-size: 14px; }
+.wordmark--logo .wordmark__img--padded { height: 62px; margin: -11px -14px -11px -8px; }
+.logo-slot {
+  width: 160px; height: 56px; display: flex; align-items: center; justify-content: center;
+  background: var(--slot); border-radius: 8px; font-size: 13px; color: var(--ink-soft);
+}
 
 .press { background: var(--tint); border-bottom: 1px solid var(--line); }
 .press__inner { padding-top: 18px; padding-bottom: 18px; display: flex; flex-wrap: wrap; align-items: center; gap: 12px 28px; }
@@ -437,11 +455,11 @@ h1, h2, h3, p, figure, blockquote { margin: 0; }
   .is-nav-open .main-nav a:not(.btn) { display: flex; align-items: center; min-height: var(--tap); border-bottom: 1px solid var(--line); }
   .is-nav-open .lang-toggle { align-self: flex-start; margin-top: 12px; }
   .main-nav .btn { display: none; } /* the sticky .m-bar carries this CTA on mobile */
-  .hero__inner { padding-top: 40px; padding-bottom: 56px; }
-  .hero__title-main { font-size: 44px; }
-  .hero__title-year { font-size: 72px; }
-  .hero__theme { font-size: 18px; }
-  .hero__scene { margin-left: 0; min-height: 360px; mask-image: none; }
+  .hero__inner { padding-top: 40px; padding-bottom: 56px; min-height: 0; }
+  .hero { background-position: 70% bottom; }
+  .hero__title-main { font-size: 96px; }
+  .hero__title-sub { font-size: clamp(32px, 9.6vw, 60px); }
+  .hero__theme { font-size: 20px; }
   .hero__when, .hero__offer { font-size: 19px; }
   .section-head h2 { font-size: 30px; }
   .about, .pathway__inner, .faq { padding-top: 64px; padding-bottom: 64px; }
