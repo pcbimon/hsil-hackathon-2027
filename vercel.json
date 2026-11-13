@@ -4,5 +4,6 @@
       "**": false,
       "main": true
     }
-  }
+  },
+  "outputDirectory": "."
 }
