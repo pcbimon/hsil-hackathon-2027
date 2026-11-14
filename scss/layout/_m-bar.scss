@@ -5,7 +5,7 @@
   display: none; position: sticky; bottom: 0; z-index: 5;
   align-items: center; justify-content: space-between; gap: 12px;
   padding: 10px 16px; background: var(--deeper); color: var(--on-deep);
-  border-top: 2px solid var(--mint);
+  border-top: 2px solid var(--crimson-rule);
   --focus: var(--mint);
   @include mobile { display: flex; }
 

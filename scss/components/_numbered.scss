@@ -19,7 +19,7 @@
     p { grid-column: 2; color: var(--ink-soft); font-size: 16px; line-height: 1.65; }
   }
   &__num {
-    grid-row: 1 / span 2; font-size: 28px; line-height: 1.1; color: var(--green); padding-top: 2px;
+    grid-row: 1 / span 2; font-size: 28px; line-height: 1.1; color: var(--crimson); padding-top: 2px;
     @include mobile { font-size: 22px; }
   }
 

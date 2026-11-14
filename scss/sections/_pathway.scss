@@ -30,10 +30,10 @@
     }
 
     &.is-past { --row-fg: var(--on-deep-muted); }
-    // current/next stage: mint rule on the left edge, faint light wash
+    // current/next stage: crimson rule on the left edge, faint light wash
     &.is-now {
       background: var(--deep-now);
-      box-shadow: inset 3px 0 0 var(--mint);
+      box-shadow: inset 3px 0 0 var(--crimson-rule);
     }
   }
 
@@ -41,7 +41,7 @@
     @include tablet-down { grid-area: var(--area); }
   }
   &__no {
-    --area: no; font-size: 14px; color: var(--mint); padding-left: 12px;
+    --area: no; font-size: 14px; color: var(--on-deep-muted); padding-left: 12px;
     @include tablet-down { padding-left: 10px; }
   }
   &__date { --area: date; font-size: 15px; font-weight: 400; line-height: 1.5; color: var(--row-fg, var(--on-deep)); }
@@ -52,7 +52,7 @@
   &__where { --area: where; font-size: 14px; color: var(--on-deep-accent); line-height: 1.5; }
   &__note { --area: note; font-size: 15px; color: var(--on-deep-muted); line-height: 1.6; }
   &__status {
-    --area: status; font-size: 14px; font-weight: 500; color: var(--mint); text-align: right; padding-right: 10px; line-height: 1.5;
+    --area: status; font-size: 14px; font-weight: 500; color: var(--crimson-soft); text-align: right; padding-right: 10px; line-height: 1.5;
     &:empty { padding: 0; }
   }
 

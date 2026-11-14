@@ -14,7 +14,8 @@
 // Shared overrides for the two dark bands (pathway, closing/footer)
 .section--deep, .closing {
   --rule: var(--deep-rule); --rule-strong: var(--deep-rule-strong); --ink-soft: var(--on-deep-muted);
-  --green: var(--mint); --green-dark: var(--on-deep); --focus: var(--mint); --mock: var(--mint-soft);
+  --green: var(--mint); --green-dark: var(--on-deep); --focus: var(--mint);
+  --crimson: var(--crimson-soft); --mock: var(--crimson-soft);
 }
 
 .section-head {
@@ -34,7 +35,7 @@
   @include tablet-down { grid-column: 1 / -1; }
 
   &__num {
-    font-size: 14px; font-weight: 500; color: var(--green); letter-spacing: 0.04em;
+    font-size: 14px; font-weight: 500; color: var(--crimson); letter-spacing: 0.04em;
     &::after { content: " /"; color: var(--ink-soft); font-weight: 400; }
   }
   &__name { color: var(--ink-soft); font-weight: 400; }

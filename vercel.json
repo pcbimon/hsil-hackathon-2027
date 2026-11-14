@@ -3,7 +3,8 @@
     "deploymentEnabled": {
       "**": false,
       "main": true,
-      "claude/funny-gates-uscyc7": true
+      "claude/funny-gates-uscyc7": true,
+      "claude/root-crimson-accents": true
     }
   },
   "outputDirectory": ".",

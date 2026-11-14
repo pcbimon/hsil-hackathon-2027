@@ -33,10 +33,10 @@
   display: inline-flex; align-items: center; min-height: var(--tap);
   color: var(--ink); font-weight: 400; text-decoration: underline; text-decoration-thickness: 1px;
   text-underline-offset: 0.35em;
-  &:hover { color: var(--green); }
+  &:hover { color: var(--crimson); }
 
   &--on-deep {
     color: var(--on-deep);
-    &:hover { color: var(--mint); }
+    &:hover { color: var(--crimson-soft); }
   }
 }

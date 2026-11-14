@@ -6,6 +6,6 @@
 
   span {
     white-space: nowrap;
-    &:not(:last-child)::after { content: " /"; color: var(--green); font-weight: 300; }
+    &:not(:last-child)::after { content: " /"; color: var(--crimson); font-weight: 300; }
   }
 }
