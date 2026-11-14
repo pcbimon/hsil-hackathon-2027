@@ -6,5 +6,6 @@
       "claude/funny-gates-uscyc7": true
     }
   },
-  "outputDirectory": "."
+  "outputDirectory": ".",
+  "trailingSlash": true
 }
