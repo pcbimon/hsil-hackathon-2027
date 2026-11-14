@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { bodyOf, convertBody, cssAssetRefs, extractMeta, phpString, renderMeta } from './export-wp.mjs';
+import { assetRefs, bodyOf, convertBody, cssAssetRefs, extractMeta, phpString, renderMeta } from './export-wp.mjs';
 
 const asset = (p) => `<?php echo esc_url( int_landing_asset( '${p}' ) ); ?>`;
 const lang = (l) => `<?php echo esc_url( int_landing_lang_url( '${l}' ) ); ?>`;
@@ -62,17 +62,37 @@ test('extracts meta from head and converts preload paths', () => {
     description: "It's D",
     fonts: 'https://fonts.googleapis.com/css2?family=A&display=swap',
     preload: ['assets/hero.webp'],
+    image: '',
   });
   assert.throws(() => extractMeta('<head></head>', { prefix: '' }), /no <title>/);
 });
 
+const ogHead = (img) => `<head><title>T</title><meta name="description" content="D">
+<meta property="og:image" content="${img}">
+<link href="https://fonts.googleapis.com/css2?family=A" rel="stylesheet"></head>`;
+
+test('extracts og:image as a landing-relative path', () => {
+  assert.equal(extractMeta(ogHead('../assets/og-image.jpg'), { prefix: '../', exists: () => true }).image, 'assets/og-image.jpg');
+  assert.equal(extractMeta(ogHead('assets/og-image.jpg'), { prefix: '', exists: () => true }).image, 'assets/og-image.jpg');
+});
+
+test('fails when og:image is missing on disk or not under assets/', () => {
+  assert.throws(() => extractMeta(ogHead('assets/nope.jpg'), { prefix: '', exists: () => false }), /og:image file missing: assets\/nope.jpg/);
+  assert.throws(() => extractMeta(ogHead('https://x.org/a.jpg'), { prefix: '', exists: () => true }), /og:image must be/);
+});
+
 test('renders meta with PHP single-quoted escaping', () => {
   assert.equal(phpString("a'b\\c"), "'a\\'b\\\\c'");
-  const php = renderMeta({ title: "It's", description: 'd', fonts: 'f', preload: ['assets/x.webp'] }, 'index.html');
+  const php = renderMeta({ title: "It's", description: 'd', fonts: 'f', preload: ['assets/x.webp'], image: 'assets/og.jpg' }, 'index.html');
   assert.match(php, /'title' {7}=> 'It\\'s',/);
   assert.match(php, /'preload' {5}=> array\( 'assets\/x.webp' \),/);
+  assert.match(php, /'image' {7}=> 'assets\/og.jpg',/);
 });
 
 test('resolves stylesheet url() relative to css/', () => {
   assert.deepEqual(cssAssetRefs('a{background:url("../assets/hero.webp")} b{background:url(data:x)} c{x:url(#f)}'), ['assets/hero.webp']);
+});
+
+test('collects og:image from head as a referenced asset', () => {
+  assert.deepEqual(assetRefs('<meta property="og:image" content="../assets/og.jpg"><img src="../assets/a.png">', '../'), ['assets/og.jpg', 'assets/a.png']);
 });
