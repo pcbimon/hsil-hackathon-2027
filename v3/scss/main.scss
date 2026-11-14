@@ -1,0 +1,31 @@
+// Mahidol x Harvard HSIL Hackathon — Thailand Hub landing page, v3 "ศูนย์ประเทศไทย: the artwork, carried through the page"
+// Build: `npm run build:v3` compiles this to v3/css/styles.css (committed, so the page needs no build step).
+// Partials are imported in cascade order: tokens -> base -> layout -> components -> sections (page order).
+
+@use "base/tokens";
+@use "base/base";
+
+@use "layout/container";
+@use "layout/status-bar";
+@use "layout/header";
+@use "layout/section";
+
+@use "components/eyebrow";
+@use "components/buttons";
+@use "components/facts";
+@use "components/numbered";
+@use "components/photo";
+@use "components/placeholder";
+
+@use "sections/hero";
+@use "sections/key-facts";
+@use "sections/numbers";
+@use "sections/about";
+@use "sections/benefits";
+@use "sections/pathway";
+@use "sections/archive";
+@use "sections/partners";
+@use "sections/faq";
+
+@use "layout/footer";
+@use "layout/m-bar";

@@ -2,8 +2,10 @@
   "git": {
     "deploymentEnabled": {
       "**": false,
-      "main": true
+      "main": true,
+      "claude/funny-gates-uscyc7": true
     }
   },
-  "outputDirectory": "."
+  "outputDirectory": ".",
+  "trailingSlash": true
 }

@@ -1,0 +1,31 @@
+@use "../abstracts" as *;
+
+// Ruled definition table: hero fact sheet, quick facts, contact
+.facts {
+  &__row {
+    display: grid; grid-template-columns: minmax(96px, 2fr) minmax(0, 3fr); gap: 4px 16px; align-items: baseline;
+    padding: 10px 0; border-bottom: 1px solid var(--rule);
+    &:first-child { border-top: 1px solid var(--rule); }
+    @include mobile { grid-template-columns: 92px minmax(0, 1fr); gap: 2px 12px; }
+  }
+  dt { font-size: 14px; font-weight: 400; color: var(--ink-soft); line-height: 1.5; }
+  dd { font-size: 16px; font-weight: 400; line-height: 1.5; min-width: 0; overflow-wrap: anywhere; }
+  .mono { font-size: 15px; }
+
+  &__status { display: flex; align-items: center; gap: 10px; }
+
+  &--wide {
+    .facts__row { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); padding: 14px 0; }
+    dd { font-size: 17px; font-weight: 500; }
+    // sits under a .split rule already
+    .facts__row:first-child { border-top: 0; padding-top: 4px; }
+  }
+  &--deep {
+    // label above value on mobile so the e-mail address never breaks mid-word
+    .facts__row { @include mobile { grid-template-columns: minmax(0, 1fr); } }
+    dd { color: var(--on-deep); }
+    // inline-block (not flex) keeps the spaces in "02-000-0000 ต่อ 1234"; padding brings the tap target to 44px
+    a { text-decoration: none; display: inline-block; padding: 11px 0; margin: -11px 0; }
+    a:hover { text-decoration: underline; }
+  }
+}

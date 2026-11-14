@@ -1,0 +1,7 @@
+// Short label with a crimson bar, e.g. the hero's "Official Thailand Hub · มหาวิทยาลัยมหิดล"
+.eyebrow {
+  display: flex; align-items: center; gap: 12px;
+  font-size: 15px; font-weight: 400; line-height: 1.4; color: var(--ink);
+
+  &::before { content: ""; flex: none; width: 28px; height: 2px; background: var(--crimson); }
+}

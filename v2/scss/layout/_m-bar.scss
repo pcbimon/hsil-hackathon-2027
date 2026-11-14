@@ -1,0 +1,19 @@
+@use "../abstracts" as *;
+
+// Sticky registration CTA, mobile only
+.m-bar {
+  display: none; position: sticky; bottom: 0; z-index: 5;
+  align-items: center; justify-content: space-between; gap: 12px;
+  padding: 10px 16px; background: var(--deeper); color: var(--on-deep);
+  border-top: 2px solid var(--crimson-bright);
+  @include mobile { display: flex; }
+
+  // JS hides the bar while the hero CTA is on screen, so the two never compete
+  transition: transform 0.2s ease, visibility 0.2s;
+  &.is-tucked { transform: translateY(100%); visibility: hidden; }
+  @media (prefers-reduced-motion: reduce) { transition: none; }
+
+  :focus-visible { outline-color: var(--on-deep); }
+
+  &__date { font-size: 14px; line-height: 1.4; }
+}

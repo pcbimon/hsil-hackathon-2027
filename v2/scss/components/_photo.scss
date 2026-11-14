@@ -1,0 +1,11 @@
+// Photo with a caption set below (not over) the image, programme-book style
+.photo {
+  display: flex; flex-direction: column; gap: 8px; min-width: 0;
+
+  img {
+    width: 100%; aspect-ratio: 4 / 3; object-fit: cover;
+    background: var(--paper-tint); border-radius: var(--radius);
+    color: var(--ink-soft); font-size: 13px; // alt text if the image fails to load
+  }
+  figcaption { font-size: 14px; color: var(--ink-soft); line-height: 1.5; }
+}

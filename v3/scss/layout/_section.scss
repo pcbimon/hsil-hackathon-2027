@@ -1,0 +1,61 @@
+@use "../abstracts" as *;
+
+// Every numbered section opens with a hairline rule, a green index in the left column and the heading
+// in the right. Bodies reuse the same 3 / 9 column split (.split).
+.section {
+  padding-top: var(--section-space); padding-bottom: var(--section-space);
+
+  &--tint { background: var(--paper-tint); }
+  // straight after the numbers band, which already brings its own bottom space
+  .numbers + & { padding-top: clamp(24px, 3vw, 40px); }
+  &--deep { background: var(--deep-gradient); color: var(--on-deep); }
+}
+
+// Shared overrides for the two dark bands (pathway, closing/footer)
+.section--deep, .closing {
+  --rule: var(--deep-rule); --rule-strong: var(--deep-rule-strong); --ink-soft: var(--on-deep-muted);
+  --green: var(--mint); --green-dark: var(--on-deep); --focus: var(--mint); --mock: var(--mint-soft);
+}
+
+.section-head {
+  display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 16px 24px;
+  border-top: 1px solid var(--rule-strong); padding-top: 20px; margin-bottom: clamp(40px, 5vw, 64px);
+  @include tablet-down { grid-template-columns: minmax(0, 1fr); }
+
+  &__main {
+    grid-column: 4 / -1; display: flex; flex-direction: column; gap: 16px; max-width: 760px;
+    @include tablet-down { grid-column: 1 / -1; }
+  }
+  h2 { font-size: clamp(28px, 4vw, 46px); line-height: 1.35; font-weight: 500; text-wrap: balance; }
+}
+
+.section-index {
+  grid-column: 1 / 4; display: flex; align-items: baseline; gap: 12px; font-size: 15px; line-height: 1.4;
+  @include tablet-down { grid-column: 1 / -1; }
+
+  &__num {
+    font-size: 14px; font-weight: 500; color: var(--green); letter-spacing: 0.04em;
+    &::after { content: " /"; color: var(--ink-soft); font-weight: 400; }
+  }
+  &__name { color: var(--ink-soft); font-weight: 400; }
+}
+
+.lede {
+  font-size: clamp(17px, 1.6vw, 20px); line-height: 1.75; color: var(--ink-soft); font-weight: 300; text-wrap: pretty;
+}
+
+// Left label / right content row inside a section body
+.split {
+  display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 12px 24px;
+  padding: 28px 0; border-top: 1px solid var(--rule);
+  @include tablet-down { grid-template-columns: minmax(0, 1fr); padding: 24px 0; }
+
+  &__label {
+    grid-column: 1 / 4; font-size: 15px; font-weight: 500; line-height: 1.5; padding-top: 4px;
+    @include tablet-down { grid-column: 1 / -1; padding-top: 0; }
+  }
+  > :not(.split__label) {
+    grid-column: 4 / -1;
+    @include tablet-down { grid-column: 1 / -1; }
+  }
+}

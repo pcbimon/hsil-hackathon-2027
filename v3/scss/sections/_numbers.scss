@@ -1,0 +1,38 @@
+@use "../abstracts" as *;
+
+// Thailand inside the global HSIL network, 2569 (2026): a caption column and three ruled numerals
+.numbers {
+  &__inner {
+    display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 24px;
+    padding-top: clamp(36px, 4.4vw, 56px); padding-bottom: clamp(32px, 4vw, 48px);
+    @include tablet-down { grid-template-columns: minmax(0, 1fr); }
+  }
+  &__caption {
+    grid-column: 1 / 5; display: flex; flex-direction: column; gap: 8px;
+    @include tablet-down { grid-column: 1 / -1; }
+  }
+  &__kicker { font-size: 14px; font-weight: 400; color: var(--green); }
+  &__title { font-size: clamp(19px, 1.7vw, 22px); font-weight: 500; line-height: 1.45; max-width: 16em; }
+
+  &__list {
+    grid-column: 5 / -1; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+    @include tablet-down { grid-column: 1 / -1; }
+    @include mobile { grid-template-columns: minmax(0, 1fr); }
+  }
+  &__item {
+    display: flex; flex-direction: column-reverse; justify-content: flex-end; gap: 6px;
+    padding: 0 24px; border-left: 1px solid var(--rule);
+    @include tablet-down { &:first-child { border-left: 0; padding-left: 0; } }
+    @include mobile {
+      flex-direction: row-reverse; justify-content: space-between; align-items: baseline;
+      padding: 12px 0; border-left: 0; border-top: 1px solid var(--rule);
+      &:last-child { border-bottom: 1px solid var(--rule); }
+    }
+
+    dt { font-size: 16px; font-weight: 400; color: var(--ink-soft); }
+    dd {
+      font-family: var(--font-mono); font-weight: 500; font-variant-numeric: tabular-nums; color: var(--green);
+      font-size: clamp(44px, 5.2vw, 70px); line-height: 1; letter-spacing: -0.04em;
+    }
+  }
+}
