@@ -15,21 +15,16 @@
   display: flex; align-items: center; gap: clamp(12px, 1.1vw, 16px); min-height: var(--tap); text-decoration: none;
   @include mobile { gap: 10px; flex: 1 1 0; min-width: 0; }
 
-  // The full Thai + English lockup at every width. The official PNG carries ~14% built-in margin, which the
-  // em-based negative margins pull back (font-size = height, so 1em = the image height).
-  // Fluid so the header still fits one row at 1024px (~1009px with a scrollbar) and at 360px with the menu button.
-  &__host {
-    flex: none; width: auto; font-size: clamp(54px, 5vw, 74px); height: 1em;
-    margin: -0.14em -0.1em -0.14em -0.14em;
-    @include mobile { font-size: clamp(46px, 13vw, 56px); }
+  // The official seal alone, as in v2; the full Thai + English lockup stays in the partners section.
+  // assets/logos/mahidol-seal-160.webp is a 160px copy of the untouched official mahidol-seal.png (3x its size here).
+  &__seal {
+    flex: none; width: 44px; height: 44px; // same size as v2
+    @include mobile { width: 36px; height: 36px; }
   }
-  &__rule {
-    flex: none; width: 1px; height: 32px; background: var(--rule);
-    @include mobile { height: 24px; }
-  }
+  &__x { flex: none; font-family: var(--font-mono); font-size: 16px; line-height: 1; color: var(--crimson); }
   &__partner {
-    height: clamp(18px, 1.55vw, 22px); width: auto; flex: none;
-    @include mobile { height: clamp(15px, 4.1vw, 18px); min-width: 0; flex: 0 1 auto; }
+    height: 30px; width: auto; flex: none; // same size as v2
+    @include mobile { height: 21px; min-width: 0; flex: 0 1 auto; }
   }
 }
 

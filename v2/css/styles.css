@@ -239,6 +239,18 @@ a:hover {
   text-decoration: underline;
   text-underline-offset: 0.3em;
 }
+.lang-toggle a {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--tap);
+  padding: 0 14px;
+  margin: 0 -14px;
+  color: inherit;
+  text-decoration: none;
+}
+.lang-toggle a:hover {
+  color: var(--crimson);
+}
 
 .site-header {
   border-bottom: 1px solid var(--rule-strong);
@@ -388,6 +400,7 @@ a:hover {
   --crimson: var(--crimson-soft);
   --green: var(--on-deep-accent);
   --green-dark: var(--on-deep);
+  font-weight: 400;
 }
 
 .section-head {
@@ -458,6 +471,7 @@ a:hover {
 }
 .section--deep .lede {
   color: var(--on-deep-muted);
+  font-weight: 400;
 }
 
 .split {
@@ -687,7 +701,7 @@ a:hover {
 }
 .numbered__item h3, .numbered__item h4 {
   grid-column: 2;
-  font-size: 19px;
+  font-size: clamp(20px, 1.15rem + 0.5vw, 22px);
   font-weight: 500;
   line-height: 1.4;
 }
@@ -1777,6 +1791,7 @@ a:hover {
 .closing {
   background: var(--deep);
   color: var(--on-deep);
+  font-weight: 400;
   --rule: var(--deep-rule);
   --rule-strong: var(--deep-rule-strong);
   --ink-soft: var(--on-deep-muted);
@@ -1949,6 +1964,18 @@ a:hover {
 .lang-switch__on {
   color: var(--on-deep);
   text-decoration: underline;
+}
+.closing .lang-switch a {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--tap);
+  padding: 0 12px;
+  margin: 0 -12px;
+  color: inherit;
+  text-decoration: none;
+}
+.closing .lang-switch a:hover {
+  color: var(--on-deep);
 }
 
 .m-bar {

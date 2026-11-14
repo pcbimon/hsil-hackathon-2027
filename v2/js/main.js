@@ -9,16 +9,31 @@ const APPLY_URL = '';
 const HACKATHON_START_UTC = Date.UTC(2027, 3, 16, 1, 0, 0);
 const MS_PER_DAY = 86400000;
 
-// Closed state: every CTA reads "Coming Soon" and is plain text, not a link (index.html holds the same
+// The page language comes from <html lang>: v2/index.html is Thai, v2/en/index.html is English.
+const LANG = document.documentElement.lang === 'en' ? 'en' : 'th';
+const STRINGS = {
+  th: {
+    cta: { label: 'สมัครเข้าร่วมการแข่งขัน', short: 'สมัคร', note: 'เปิดรับสมัครแล้ว', status: 'เปิดรับสมัครแล้ว' },
+    countdown: (days) => `อีก ${days} วันถึงวันแข่งขัน 16–17 เมษายน 2570`,
+    stepStatus: 'สถานะ: ', stepNow: 'ช่วงปัจจุบัน', stepNext: 'ลำดับถัดไป',
+    tickerPause: 'หยุด', tickerPlay: 'เล่น', tickerPauseLabel: 'หยุดแถบข้อความเลื่อน', tickerPlayLabel: 'เล่นแถบข้อความเลื่อน',
+  },
+  en: {
+    cta: { label: 'Apply now', short: 'Apply', note: 'Applications are open', status: 'Open' },
+    countdown: (days) => `${days} days until the hackathon on 16–17 April 2027`,
+    stepStatus: 'Status: ', stepNow: 'Current stage', stepNext: 'Up next',
+    tickerPause: 'Pause', tickerPlay: 'Play', tickerPauseLabel: 'Pause the scrolling text', tickerPlayLabel: 'Play the scrolling text',
+  },
+}[LANG];
+
+// Closed state: every CTA reads "Coming Soon" and is plain text, not a link (the HTML holds the same
 // markup as the no-JS fallback, so nothing is rewritten). Open state: the CTAs become links to APPLY_URL.
-const CTA = REGISTRATION_OPEN
-  ? { href: APPLY_URL || '#', label: 'สมัครเข้าร่วมการแข่งขัน', short: 'สมัคร', note: 'เปิดรับสมัครแล้ว', status: 'เปิดรับสมัครแล้ว' }
-  : null;
+const CTA = REGISTRATION_OPEN ? { href: APPLY_URL || '#', ...STRINGS.cta } : null;
 
 function applyCta(cta) {
   document.documentElement.classList.toggle('is-registration-open', REGISTRATION_OPEN);
   if (!cta) return;
-  // data-cta="label|short" become links with Thai labels; data-cta-note / data-reg-status get the status text
+  // data-cta="label|short" become links with labels in the page language; data-cta-note / data-reg-status get the status text
   document.querySelectorAll('[data-cta]').forEach((el) => {
     el.href = cta.href;
     el.removeAttribute('lang');
@@ -47,7 +62,7 @@ function setupCountdown() {
   const cells = {};
   grid.querySelectorAll('[data-unit]').forEach((el) => { cells[el.dataset.unit] = el; });
   const text = box.querySelector('[data-countdown-text]');
-  if (text) text.textContent = `อีก ${Math.ceil(remaining / MS_PER_DAY)} วันถึงวันแข่งขัน 16–17 เมษายน 2570`;
+  if (text) text.textContent = STRINGS.countdown(Math.ceil(remaining / MS_PER_DAY));
 
   const render = () => {
     const t = splitRemaining(HACKATHON_START_UTC - Date.now());
@@ -68,7 +83,7 @@ function setupCountdown() {
 // ---- Pathway: badge the first stage that hasn't ended ----
 const bangkokEndOfDay = (isoDate) => Date.parse(`${isoDate}T23:59:59+07:00`);
 
-// Same rule as the main site: "ช่วงปัจจุบัน" once it has started, otherwise "ลำดับถัดไป".
+// Same rule as the main site: "current stage" once it has started, otherwise "up next".
 // A stage starts when the previous one ends; the first stage carries its own data-start.
 function markCurrentStep(nowMs) {
   const rows = [...document.querySelectorAll('.route__row[data-end]')];
@@ -84,8 +99,8 @@ function markCurrentStep(nowMs) {
   if (status) {
     const label = document.createElement('span');
     label.className = 'sr-only';
-    label.textContent = 'สถานะ: ';
-    status.append(label, started ? 'ช่วงปัจจุบัน' : 'ลำดับถัดไป');
+    label.textContent = STRINGS.stepStatus;
+    status.append(label, started ? STRINGS.stepNow : STRINGS.stepNext);
   }
 }
 
@@ -165,8 +180,8 @@ function setupTicker() {
   button.className = 'ticker__toggle';
   const setRunning = (running) => {
     ticker.classList.toggle('is-running', running);
-    button.textContent = running ? 'หยุด' : 'เล่น';
-    button.setAttribute('aria-label', running ? 'หยุดแถบข้อความเลื่อน' : 'เล่นแถบข้อความเลื่อน');
+    button.textContent = running ? STRINGS.tickerPause : STRINGS.tickerPlay;
+    button.setAttribute('aria-label', running ? STRINGS.tickerPauseLabel : STRINGS.tickerPlayLabel);
   };
   button.addEventListener('click', () => setRunning(!ticker.classList.contains('is-running')));
   ticker.append(button);

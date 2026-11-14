@@ -2,7 +2,7 @@
 
 // Closing CTA + contact + footer share the second (and last) dark band
 .closing {
-  background: var(--deep); color: var(--on-deep);
+  background: var(--deep); color: var(--on-deep); font-weight: 400;
   --rule: var(--deep-rule); --rule-strong: var(--deep-rule-strong); --ink-soft: var(--on-deep-muted);
   --crimson: var(--crimson-soft); --green: var(--on-deep-accent); --green-dark: var(--on-deep);
   border-top: 2px solid var(--crimson-bright);
@@ -71,8 +71,13 @@
   }
 }
 
-// Visual only: there is no English version yet
 .lang-switch {
   display: flex; align-items: center; gap: 16px; min-height: var(--tap); font-size: 14px; color: var(--on-deep-muted);
   &__on { color: var(--on-deep); text-decoration: underline; }
+  // `.closing a:not(.btn)` would otherwise paint the other language as bright as the current one
+  .closing & a {
+    display: inline-flex; align-items: center; min-height: var(--tap); padding: 0 12px; margin: 0 -12px;
+    color: inherit; text-decoration: none;
+    &:hover { color: var(--on-deep); }
+  }
 }
