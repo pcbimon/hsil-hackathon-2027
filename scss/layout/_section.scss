@@ -16,6 +16,7 @@
   --rule: var(--deep-rule); --rule-strong: var(--deep-rule-strong); --ink-soft: var(--on-deep-muted);
   --green: var(--mint); --green-dark: var(--on-deep); --focus: var(--mint);
   --crimson: var(--crimson-soft); --mock: var(--crimson-soft);
+  font-weight: 400; // Kanit 300 thins out in light-on-dark text
 }
 
 .section-head {
@@ -43,6 +44,7 @@
 
 .lede {
   font-size: clamp(17px, 1.6vw, 20px); line-height: 1.75; color: var(--ink-soft); font-weight: 300; text-wrap: pretty;
+  .section--deep & { font-weight: 400; }
 }
 
 // Left label / right content row inside a section body

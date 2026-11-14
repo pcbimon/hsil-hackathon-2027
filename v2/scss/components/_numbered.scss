@@ -15,7 +15,7 @@
       &:nth-child(2) { border-top: 1px solid var(--rule); padding-top: 20px; }
     }
 
-    h3, h4 { grid-column: 2; font-size: 19px; font-weight: 500; line-height: 1.4; }
+    h3, h4 { grid-column: 2; font-size: clamp(20px, 1.15rem + 0.5vw, 22px); font-weight: 500; line-height: 1.4; }
     p { grid-column: 2; color: var(--ink-soft); font-size: 16px; line-height: 1.65; }
   }
   &__num {

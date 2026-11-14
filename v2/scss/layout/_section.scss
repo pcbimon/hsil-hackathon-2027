@@ -12,6 +12,7 @@
     background: var(--deep); color: var(--on-deep);
     --rule: var(--deep-rule); --rule-strong: var(--deep-rule-strong); --ink-soft: var(--on-deep-muted);
     --crimson: var(--crimson-soft); --green: var(--on-deep-accent); --green-dark: var(--on-deep);
+    font-weight: 400; // Kanit 300 thins out in light-on-dark text
   }
 }
 
@@ -40,7 +41,7 @@
 
 .lede {
   font-size: clamp(17px, 1.6vw, 20px); line-height: 1.7; color: var(--ink-soft); font-weight: 300; text-wrap: pretty;
-  .section--deep & { color: var(--on-deep-muted); }
+  .section--deep & { color: var(--on-deep-muted); font-weight: 400; }
 }
 
 // Left label / right content row inside a section body
