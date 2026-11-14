@@ -1,49 +1,66 @@
 @use "../abstracts" as *;
 
-// Bangkok -> Boston timeline. Step colours come from --step-* so each variant only swaps variables.
-.pathway {
-  background: var(--deep); color: var(--white);
+// 03: กรุงเทพมหานคร -> บอสตัน as a ruled schedule table on the artwork-gradient band. Six columns on
+// desktop; on tablet two lines per row; on mobile each row stacks (no horizontal scroll).
+.route {
+  --route-cols: 48px minmax(170px, 1.25fr) minmax(0, 1.5fr) minmax(140px, 1fr) minmax(0, 1.4fr) 96px;
+  border-top: 1px solid var(--rule-strong);
 
-  &__inner {
-    padding-top: 96px; padding-bottom: 96px; display: flex; flex-direction: column; gap: 48px;
-    @include mobile { padding-top: 64px; padding-bottom: 64px; }
+  &__head {
+    display: grid; grid-template-columns: var(--route-cols); gap: 16px; padding: 10px 0;
+    border-bottom: 1px solid var(--rule-strong);
+    font-size: 14px; font-weight: 400; color: var(--on-deep-muted);
+    @include tablet-down { display: none; }
+
+    span:first-child { padding-left: 10px; }
+    span:last-child { text-align: right; padding-right: 10px; }
   }
-  .section-head p { color: var(--on-deep-muted); }
-  &__footnote { font-size: 14px; color: var(--on-deep-muted); }
-}
 
-.steps {
-  list-style: none; margin: 0; padding: 0;
-  display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 12px;
-  // Narrower: six steps in even rows, Demo Day as the full-width finale, so no step is left alone on a row
-  @include tablet-down { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  @include mobile { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-}
+  &__row {
+    display: grid; grid-template-columns: var(--route-cols); gap: 6px 16px; align-items: baseline;
+    padding: 18px 0; border-bottom: 1px solid var(--rule); position: relative;
+    @include tablet-down {
+      grid-template-columns: 40px minmax(170px, 1fr) minmax(0, 2fr) 96px;
+      grid-template-areas: "no date stage status" "no where note status";
+    }
+    @include mobile {
+      grid-template-columns: 36px minmax(0, 1fr) auto;
+      grid-template-areas: "no date status" "no stage stage" "no where where" "no note note";
+      gap: 4px 12px;
+    }
 
-.step {
-  --step-bg: var(--surface); --step-border: var(--surface); --step-fg: var(--ink); --step-muted: var(--ink-soft);
-  position: relative;
-  display: flex; flex-direction: column; gap: 8px; padding: 20px 14px; border-radius: 12px;
-  background: var(--step-bg); border: 1px solid var(--step-border); color: var(--step-fg);
-
-  &--online { --step-bg: transparent; --step-border: var(--deep-divider); --step-fg: var(--white); --step-muted: var(--red-300); }
-  &--boston {
-    --step-bg: var(--crimson-bright); --step-border: var(--crimson-bright); --step-fg: var(--deeper); --step-muted: var(--red-950);
-    @include tablet-down { grid-column: 1 / -1; }
+    &.is-past { --row-fg: var(--on-deep-muted); }
+    // current/next stage: mint rule on the left edge, faint light wash
+    &.is-now {
+      background: var(--deep-now);
+      box-shadow: inset 3px 0 0 var(--mint);
+    }
   }
-  &--now { outline: 3px solid var(--mint); outline-offset: 3px; }
 
-  // "ถัดไป" badge, added by js/main.js
-  &__now {
-    position: absolute; top: -12px; left: 12px; padding: 1px 10px; border-radius: var(--pill);
-    background: var(--mint); color: var(--on-mint); font-size: 12px; font-weight: 600;
+  &__no, &__date, &__stage, &__where, &__note, &__status {
+    @include tablet-down { grid-area: var(--area); }
   }
-  &__where, &__note { font-size: 13px; color: var(--step-muted); }
-  &__name { font-size: clamp(16px, 1.4vw, 18px); font-weight: 500; line-height: 1.3; }
-  &__date { font-size: 15px; font-weight: 400; }
-}
+  &__no {
+    --area: no; font-size: 14px; color: var(--mint); padding-left: 12px;
+    @include tablet-down { padding-left: 10px; }
+  }
+  &__date { --area: date; font-size: 15px; font-weight: 400; line-height: 1.5; color: var(--row-fg, var(--on-deep)); }
+  &__stage {
+    --area: stage; font-size: clamp(18px, 1.6vw, 21px); font-weight: 500; line-height: 1.4; color: var(--row-fg, var(--on-deep));
+    @include mobile { margin-top: 4px; }
+  }
+  &__where { --area: where; font-size: 14px; color: var(--on-deep-accent); line-height: 1.5; }
+  &__note { --area: note; font-size: 15px; color: var(--on-deep-muted); line-height: 1.6; }
+  &__status {
+    --area: status; font-size: 14px; font-weight: 500; color: var(--mint); text-align: right; padding-right: 10px; line-height: 1.5;
+    &:empty { padding: 0; }
+  }
 
-@media (prefers-reduced-motion: no-preference) {
-  .step--boston.is-seen { animation: boston-glow 2.4s ease-in-out 2; }
+  &__row--key &__stage { font-weight: 600; }
+  &__row--boston {
+    border-bottom-color: var(--rule-strong);
+    .route__stage { font-family: var(--font-display); font-weight: 800; font-size: clamp(22px, 2.2vw, 30px); letter-spacing: -0.01em; }
+  }
+
+  &__footnote { margin-top: 24px; font-size: 14px; color: var(--on-deep-muted); max-width: 52em; line-height: 1.7; }
 }
-@keyframes boston-glow { 50% { box-shadow: 0 0 0 6px var(--glow-crimson); } }

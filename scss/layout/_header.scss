@@ -1,68 +1,70 @@
 @use "../abstracts" as *;
 
+// Light bar so the official logos sit on white, as the logo files require
 .site-header {
-  background: var(--surface); border-bottom: 1px solid var(--line);
+  background: var(--paper); border-bottom: 1px solid var(--rule);
 
   &__inner {
-    padding-top: 14px; padding-bottom: 14px;
-    display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px;
+    display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 20px;
+    padding-top: 10px; padding-bottom: 10px;
   }
 }
 
+// Mahidol leads at a confident size; the Harvard Chan logo follows, visibly smaller, as the partner
 .brand {
-  display: flex; align-items: center; gap: 14px;
-  @include mobile { flex: 1 1 0; min-width: 0; gap: 10px; }
+  display: flex; align-items: center; gap: clamp(12px, 1.1vw, 16px); min-height: var(--tap); text-decoration: none;
+  @include mobile { gap: 10px; flex: 1 1 0; min-width: 0; }
 
-  &__seal {
-    width: 44px; height: 44px; flex: none;
-    @include mobile { width: 36px; height: 36px; }
+  // The full Thai + English lockup at every width. The official PNG carries ~14% built-in margin, which the
+  // em-based negative margins pull back (font-size = height, so 1em = the image height).
+  // Fluid so the header still fits one row at 1024px (~1009px with a scrollbar) and at 360px with the menu button.
+  &__host {
+    flex: none; width: auto; font-size: clamp(54px, 5vw, 74px); height: 1em;
+    margin: -0.14em -0.1em -0.14em -0.14em;
+    @include mobile { font-size: clamp(46px, 13vw, 56px); }
+  }
+  &__rule {
+    flex: none; width: 1px; height: 32px; background: var(--rule);
+    @include mobile { height: 24px; }
   }
   &__partner {
-    height: 32px; width: auto; flex: none;
-    @include mobile { height: 22px; }
+    height: clamp(18px, 1.55vw, 22px); width: auto; flex: none;
+    @include mobile { height: clamp(15px, 4.1vw, 18px); min-width: 0; flex: 0 1 auto; }
   }
-  &__x { font-size: 18px; color: var(--crimson); font-weight: 600; }
 }
 
 .main-nav {
-  display: flex; flex-wrap: wrap; align-items: center; gap: 22px; font-size: 15px; font-weight: 400;
+  display: flex; flex-wrap: wrap; align-items: center; gap: 4px clamp(14px, 1.4vw, 20px); font-size: 15px; font-weight: 400;
 
   a:not(.btn) {
-    color: var(--ink); text-decoration: none;
-    &:hover { color: var(--green); }
+    display: inline-flex; align-items: center; min-height: var(--tap); white-space: nowrap;
+    color: var(--ink); text-decoration: none; border-bottom: 1px solid transparent;
+    &:hover { border-bottom-color: var(--green); color: var(--green); }
   }
-  .btn {
-    background: var(--green); color: var(--white); font-weight: 500;
-    &:hover { background: var(--green-dark); }
-  }
+  &__cta { margin-left: 4px; }
 }
 
 .nav-toggle {
-  display: none; place-items: center; width: var(--tap); height: var(--tap); padding: 0;
-  border: 1px solid var(--line-strong); border-radius: 10px; background: var(--surface); color: var(--ink); cursor: pointer;
+  display: none; width: var(--tap); height: var(--tap); padding: 0; flex: none;
+  border: 1px solid var(--ink); border-radius: var(--radius); background: transparent; color: var(--ink);
+  cursor: pointer;
 
+  &:hover { background: var(--hover-tint); }
   svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; }
-}
-.nav-toggle__close, .nav-toggle[aria-expanded="true"] .nav-toggle__open { display: none; }
-.nav-toggle[aria-expanded="true"] .nav-toggle__close { display: inline; }
-
-.lang-toggle {
-  font: inherit; font-size: 13px; padding: 8px 12px; min-height: var(--tap);
-  border: 1px solid var(--line-strong); background: var(--surface); border-radius: var(--pill);
-  color: var(--ink); cursor: pointer;
+  // Hamburger while closed, a cross while open. aria-expanded carries the state for screen readers.
+  &__close, &[aria-expanded="true"] &__open { display: none; }
+  &[aria-expanded="true"] &__close { display: inline; }
 }
 
-// Tablet and below: the full nav no longer fits beside the logos, so collapse it behind .nav-toggle.
-// .has-nav-toggle is added by js/main.js, so without JS the nav stays visible.
+// Tablet and below: collapse the nav behind the hamburger toggle. .has-nav-toggle comes from js/main.js,
+// so without JS the nav simply wraps under the logos.
 @include tablet-down {
-  .has-nav-toggle .nav-toggle { display: grid; }
+  .has-nav-toggle .nav-toggle { display: inline-flex; align-items: center; justify-content: center; }
   .has-nav-toggle .main-nav { display: none; }
-  .has-nav-toggle.is-nav-open .main-nav { display: flex; flex-direction: column; align-items: stretch; gap: 0; width: 100%; }
-  .is-nav-open .main-nav a:not(.btn) { display: flex; align-items: center; min-height: var(--tap); border-bottom: 1px solid var(--line); }
-  .is-nav-open .lang-toggle { align-self: flex-start; margin-top: 12px; }
-}
-
-@include mobile {
-  .main-nav { gap: 12px 18px; }
-  .main-nav .btn { display: none; } // the sticky .m-bar carries this CTA on mobile
+  .has-nav-toggle.is-nav-open .main-nav {
+    display: flex; flex-direction: column; align-items: stretch; gap: 0; width: 100%;
+    border-top: 1px solid var(--rule); margin-top: 4px;
+  }
+  .is-nav-open .main-nav a:not(.btn) { border-bottom: 1px solid var(--rule); font-size: 17px; }
+  .is-nav-open .main-nav__cta { margin: 16px 0 4px; align-self: flex-start; }
 }

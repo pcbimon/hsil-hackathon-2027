@@ -1,34 +1,81 @@
-.site-footer {
-  background: var(--deeper); color: var(--on-deep-muted); border-top: 4px solid var(--crimson-bright);
+@use "../abstracts" as *;
 
-  &__grid {
-    padding-top: 56px; padding-bottom: 32px;
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 32px;
+// Closing CTA + contact + footer share the second (and last) dark band, in the artwork's gradient
+.closing {
+  background: var(--deep-gradient); color: var(--on-deep);
+
+  a:not(.btn) { color: var(--on-deep); }
+
+  &__cta {
+    display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 48px 24px;
+    padding-top: var(--section-space); padding-bottom: clamp(56px, 7vw, 96px);
+    @include tablet-down { grid-template-columns: minmax(0, 1fr); }
   }
-  &__col {
-    display: flex; flex-direction: column; gap: 8px; font-size: 14px;
+  &__copy {
+    grid-column: 1 / 8; display: flex; flex-direction: column; gap: 20px;
+    @include tablet-down { grid-column: 1 / -1; }
 
-    a:not(.btn) {
-      color: var(--mint-soft);
-      &:hover { color: var(--white); }
+    h2 { font-size: clamp(28px, 4vw, 48px); line-height: 1.35; font-weight: 500; max-width: 15em; }
+  }
+  &__kicker { font-size: 15px; font-weight: 400; color: var(--mint); }
+  &__status {
+    display: flex; align-items: center; gap: 10px; font-size: 18px; font-weight: 500;
+    // on the dark band the dot is mint until registration opens; no crimson here
+    .status-dot { background: var(--mint); }
+  }
+  &__note { color: var(--on-deep-muted); max-width: 36em; }
+  &__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 28px; margin-top: 8px; }
+}
+
+.contact {
+  grid-column: 8 / -1; align-self: end;
+  @include tablet-down { grid-column: 1 / -1; }
+
+  &__title { font-size: 17px; font-weight: 500; margin-bottom: 8px; }
+}
+
+.site-footer {
+  display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 32px 24px;
+  padding-top: 40px; padding-bottom: 40px; position: relative;
+  font-size: 15px; color: var(--on-deep-muted);
+  @include tablet-down { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  @include mobile { grid-template-columns: minmax(0, 1fr); }
+
+  // Padding lives on the container, so the rule is drawn inside the gutter with a pseudo element
+  &::before {
+    content: ""; position: absolute; top: 0; left: var(--gutter); right: var(--gutter);
+    border-top: 1px solid var(--rule);
+  }
+
+  &__col {
+    grid-column: span 3; display: flex; flex-direction: column; gap: 10px;
+    @include tablet-down { grid-column: auto; }
+
+    &--brand {
+      grid-column: 1 / 7; max-width: 30em;
+      @include tablet-down { grid-column: 1 / -1; }
     }
   }
-  &__heading { font-size: 15px; font-weight: 500; color: var(--white); }
-  &__brand { font-size: 18px; font-weight: 600; color: var(--white); }
-
-  .btn--mint { margin-top: 8px; align-self: flex-start; font-size: 14px; font-weight: 500; }
+  &__brand { font-family: var(--font-display); font-weight: 700; font-size: 17px; color: var(--on-deep); }
+  &__host { font-size: 17px; font-weight: 500; color: var(--on-deep); }
+  &__heading { font-size: 15px; font-weight: 500; color: var(--on-deep); }
+  &__links {
+    display: flex; flex-direction: column;
+    a {
+      display: inline-flex; align-items: center; min-height: var(--tap); text-decoration: none;
+      &:hover { text-decoration: underline; }
+    }
+  }
 
   &__legal {
-    padding-top: 20px; padding-bottom: 32px; border-top: 1px solid var(--deep-divider); font-size: 12px; color: var(--on-deep-muted);
-    a { color: var(--mint-soft); &:hover { color: var(--white); } }
+    padding-top: 20px; padding-bottom: 32px; font-size: 13px; color: var(--on-deep-muted);
+    display: flex; flex-direction: column; gap: 4px;
+    @include mobile { padding-bottom: 24px; }
   }
 }
 
-.lang-switch { display: flex; gap: 8px; margin-top: 4px; }
-.site-footer__col .lang-switch a {
-  font-size: 13px; padding: 8px 14px; border-radius: var(--pill); text-decoration: none;
-  min-height: var(--tap); display: inline-flex; align-items: center;
-  color: var(--white); border: 1px solid var(--teal-500);
-
-  &[aria-current="true"] { color: var(--on-mint); background: var(--white); border-color: var(--white); font-weight: 500; }
+// Visual only: there is no English version yet
+.lang-switch {
+  display: flex; align-items: center; gap: 16px; min-height: var(--tap); font-size: 14px; color: var(--on-deep-muted);
+  &__on { color: var(--on-deep); text-decoration: underline; }
 }
