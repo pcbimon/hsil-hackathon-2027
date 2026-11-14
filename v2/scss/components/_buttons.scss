@@ -15,6 +15,12 @@
     background: var(--paper); color: var(--deep);
     &:hover { background: var(--hover-tint); color: var(--deep); }
   }
+  // "Coming Soon": rendered without href while registration is closed, so it is plain text styled as a
+  // button. No arrow and no hover, because there is nothing to click yet.
+  &:not([href]) {
+    cursor: default; pointer-events: none;
+    &::after { content: none; }
+  }
   &--small {
     min-height: var(--tap); padding: 8px 16px; font-size: 15px;
     &::after { content: none; }

@@ -17,7 +17,7 @@
     display: grid; grid-template-columns: var(--route-cols); gap: 6px 16px; align-items: baseline;
     padding: 18px 0; border-bottom: 1px solid var(--rule); position: relative;
     @include tablet-down {
-      grid-template-columns: 40px minmax(150px, 1fr) minmax(0, 2fr) 64px;
+      grid-template-columns: 40px minmax(150px, 1fr) minmax(0, 2fr) 80px; // status fits "ช่วงปัจจุบัน"
       grid-template-areas: "no date stage status" "no where note status";
     }
     @include mobile {
@@ -55,6 +55,7 @@
   &__note { --area: note; font-size: 15px; color: var(--ink-soft); line-height: 1.55; }
   &__status {
     --area: status; font-size: 14px; font-weight: 500; color: var(--crimson); text-align: right; padding-right: 10px;
+    white-space: nowrap;
     &:empty { padding: 0; }
   }
 
