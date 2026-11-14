@@ -1,7 +1,8 @@
 // "ศูนย์ประเทศไทย: the artwork, carried through the page" tokens. CSS custom properties, not Sass
 // variables, because some change at runtime (--gutter on mobile, the --on-* set inside dark bands).
 // The palette is sampled from the client artwork (assets/aw/Harvard Hackathon 2027_ComingSoon.jpg):
-// its teal-to-green gradient and the mint of "2027". Crimson is a rare accent only.
+// its teal-to-green gradient and the mint of "2027". Harvard crimson is the accent, placed as in v2:
+// section numbers, list numerals, markers, rules and focus rings.
 // Primitive scales hold raw hex; components only use the semantic names. No raw hex outside this file.
 @use "../abstracts" as *;
 
@@ -31,9 +32,11 @@
   --teal-900: #03363F;    // gradient dark end
   --teal-950: #022A31;
 
-  // Red: Harvard crimson, rare accent
+  // Red: Harvard crimson accent
+  --red-200: #FFBDC2;   // crimson text on the dark bands: 5.3:1 at the gradient light end
+  --red-400: #FF5A63;   // thin rules and dots on the dark bands (decorative, not text)
   --red-500: #E0203C;   // the artwork's eyebrow bar
-  --red-600: #A51C30;
+  --red-600: #A51C30;   // 7.5:1 on white, 6.8:1 on tint
 
   // Gray: green-tinted text
   --gray-600: #3F5C56;
@@ -59,8 +62,10 @@
   --mint-hover: var(--green-500);
   --mint-soft: var(--green-300);      // secondary accent text on dark
 
-  --crimson: var(--red-600);          // rare: eyebrow bar on light, status dot
-  --crimson-bright: var(--red-500);   // rare: eyebrow bar on the hero (decorative, as in the artwork)
+  --crimson: var(--red-600);          // accent text and markers on light grounds
+  --crimson-bright: var(--red-500);   // eyebrow bar on the hero (decorative, as in the artwork)
+  --crimson-rule: var(--red-400);     // rules, bars and dots on dark bands (decorative)
+  --crimson-soft: var(--red-200);     // accent text on dark bands
 
   // Dark bands (pathway, closing/footer): the artwork gradient, kept dark enough for mint text
   --deep: var(--teal-900);
@@ -81,11 +86,11 @@
   --silver: var(--silver-300);
   --title-shadow: rgb(0 0 0 / 0.35);
 
-  // Placeholder / unconfirmed content markers: neutral dark green on light, soft mint on dark
-  --mock: var(--green);
+  // Placeholder / unconfirmed content markers: crimson on light, soft crimson on dark
+  --mock: var(--crimson);
 
-  // Focus ring: dark green on light (6.7:1 on white), mint on dark (5.7:1+)
-  --focus: var(--green-650);
+  // Focus ring: crimson on light (7.5:1 on white), mint on dark (5.7:1+)
+  --focus: var(--crimson);
 
   // ---- Type ----
   --font-thai: Kanit, "Noto Sans Thai", Loma, system-ui, sans-serif;

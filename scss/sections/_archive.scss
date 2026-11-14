@@ -52,8 +52,8 @@
 
   &__body { display: flex; flex-direction: column; gap: 10px; }
   &__rank {
-    display: flex; align-items: center; gap: 10px; font-size: 15px; font-weight: 500; color: var(--green);
-    &::before { content: ""; flex: none; width: 20px; height: 2px; background: var(--green); }
+    display: flex; align-items: center; gap: 10px; font-size: 15px; font-weight: 500; color: var(--crimson);
+    &::before { content: ""; flex: none; width: 20px; height: 2px; background: var(--crimson); }
   }
   h3 {
     font-family: var(--font-display); font-weight: 800; font-size: clamp(28px, 3vw, 36px);
@@ -67,7 +67,7 @@
 
 .pull-quote {
   margin: clamp(56px, 7vw, 96px) 0 0 25%; max-width: 860px;
-  border-left: 2px solid var(--green); padding: 4px 0 4px clamp(20px, 3vw, 36px);
+  border-left: 2px solid var(--crimson); padding: 4px 0 4px clamp(20px, 3vw, 36px);
   display: flex; flex-direction: column; gap: 20px;
   @include tablet-down { margin-left: 0; }
 

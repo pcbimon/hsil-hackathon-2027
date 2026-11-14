@@ -16,7 +16,7 @@
       &::-webkit-details-marker { display: none; }
       &::after {
         content: "+"; flex: none; width: 1ch; text-align: center;
-        font-family: var(--font-mono); font-size: 22px; font-weight: 400; color: var(--green);
+        font-family: var(--font-mono); font-size: 22px; font-weight: 400; color: var(--crimson);
       }
       &:hover { color: var(--green-dark); }
     }

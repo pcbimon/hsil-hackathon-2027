@@ -3,6 +3,7 @@
 // Closing CTA + contact + footer share the second (and last) dark band, in the artwork's gradient
 .closing {
   background: var(--deep-gradient); color: var(--on-deep);
+  border-top: 2px solid var(--crimson-rule);
 
   a:not(.btn) { color: var(--on-deep); }
 
@@ -17,11 +18,12 @@
 
     h2 { font-size: clamp(28px, 4vw, 48px); line-height: 1.35; font-weight: 500; max-width: 15em; }
   }
-  &__kicker { font-size: 15px; font-weight: 400; color: var(--mint); }
+  &__kicker { font-size: 15px; font-weight: 400; color: var(--crimson-soft); }
   &__status {
     display: flex; align-items: center; gap: 10px; font-size: 18px; font-weight: 500;
-    // on the dark band the dot is mint until registration opens; no crimson here
-    .status-dot { background: var(--mint); }
+    // "not open yet" dot on the dark band; turns mint once registration opens
+    .status-dot { background: var(--crimson-rule); }
+    .is-registration-open & .status-dot { background: var(--mint); }
   }
   &__note { color: var(--on-deep-muted); max-width: 36em; }
   &__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 28px; margin-top: 8px; }

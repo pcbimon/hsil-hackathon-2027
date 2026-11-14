@@ -19,6 +19,8 @@
   --teal-850: #06403F;
   --teal-900: #03363F;
   --teal-950: #022A31;
+  --red-200: #FFBDC2;
+  --red-400: #FF5A63;
   --red-500: #E0203C;
   --red-600: #A51C30;
   --gray-600: #3F5C56;
@@ -40,6 +42,8 @@
   --mint-soft: var(--green-300);
   --crimson: var(--red-600);
   --crimson-bright: var(--red-500);
+  --crimson-rule: var(--red-400);
+  --crimson-soft: var(--red-200);
   --deep: var(--teal-900);
   --deep-end: var(--teal-800);
   --deep-gradient: linear-gradient(120deg, var(--teal-900) 0%, var(--teal-850) 45%, var(--teal-800) 100%);
@@ -55,8 +59,8 @@
   --hero-scrim-soft: rgb(2 42 49 / 0.35);
   --silver: var(--silver-300);
   --title-shadow: rgb(0 0 0 / 0.35);
-  --mock: var(--green);
-  --focus: var(--green-650);
+  --mock: var(--crimson);
+  --focus: var(--crimson);
   --font-thai: Kanit, "Noto Sans Thai", Loma, system-ui, sans-serif;
   --font-display: "Mona Sans", "Helvetica Neue", Arial, sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
@@ -410,7 +414,8 @@ a:hover {
   --green: var(--mint);
   --green-dark: var(--on-deep);
   --focus: var(--mint);
-  --mock: var(--mint-soft);
+  --crimson: var(--crimson-soft);
+  --mock: var(--crimson-soft);
 }
 
 .section-head {
@@ -461,7 +466,7 @@ a:hover {
 .section-index__num {
   font-size: 14px;
   font-weight: 500;
-  color: var(--green);
+  color: var(--crimson);
   letter-spacing: 0.04em;
 }
 .section-index__num::after {
@@ -598,13 +603,13 @@ a:hover {
   text-underline-offset: 0.35em;
 }
 .text-link:hover {
-  color: var(--green);
+  color: var(--crimson);
 }
 .text-link--on-deep {
   color: var(--on-deep);
 }
 .text-link--on-deep:hover {
-  color: var(--mint);
+  color: var(--crimson-soft);
 }
 
 .facts__row {
@@ -722,7 +727,7 @@ a:hover {
   grid-row: 1/span 2;
   font-size: 28px;
   line-height: 1.1;
-  color: var(--green);
+  color: var(--crimson);
   padding-top: 2px;
 }
 @media (max-width: 720px) {
@@ -766,7 +771,7 @@ a:hover {
 }
 
 .todo {
-  color: var(--green);
+  color: var(--crimson);
 }
 
 [data-mock] {
@@ -1024,7 +1029,7 @@ a:hover {
 .numbers__kicker {
   font-size: 14px;
   font-weight: 400;
-  color: var(--green);
+  color: var(--crimson);
 }
 .numbers__title {
   font-size: clamp(19px, 1.7vw, 22px);
@@ -1099,7 +1104,7 @@ a:hover {
 }
 .roles span:not(:last-child)::after {
   content: " /";
-  color: var(--green);
+  color: var(--crimson);
   font-weight: 300;
 }
 
@@ -1249,7 +1254,7 @@ a:hover {
 }
 .route__row.is-now {
   background: var(--deep-now);
-  box-shadow: inset 3px 0 0 var(--mint);
+  box-shadow: inset 3px 0 0 var(--crimson-rule);
 }
 @media (max-width: 1023px) {
   .route__no, .route__date, .route__stage, .route__where, .route__note, .route__status {
@@ -1259,7 +1264,7 @@ a:hover {
 .route__no {
   --area: no;
   font-size: 14px;
-  color: var(--mint);
+  color: var(--on-deep-muted);
   padding-left: 12px;
 }
 @media (max-width: 1023px) {
@@ -1302,7 +1307,7 @@ a:hover {
   --area: status;
   font-size: 14px;
   font-weight: 500;
-  color: var(--mint);
+  color: var(--crimson-soft);
   text-align: right;
   padding-right: 10px;
   line-height: 1.5;
@@ -1455,14 +1460,14 @@ a:hover {
   gap: 10px;
   font-size: 15px;
   font-weight: 500;
-  color: var(--green);
+  color: var(--crimson);
 }
 .winner__rank::before {
   content: "";
   flex: none;
   width: 20px;
   height: 2px;
-  background: var(--green);
+  background: var(--crimson);
 }
 .winner h3 {
   font-family: var(--font-display);
@@ -1484,7 +1489,7 @@ a:hover {
 .pull-quote {
   margin: clamp(56px, 7vw, 96px) 0 0 25%;
   max-width: 860px;
-  border-left: 2px solid var(--green);
+  border-left: 2px solid var(--crimson);
   padding: 4px 0 4px clamp(20px, 3vw, 36px);
   display: flex;
   flex-direction: column;
@@ -1674,10 +1679,10 @@ a:hover {
   color: var(--ink-soft);
 }
 .press a:hover {
-  color: var(--green);
+  color: var(--crimson);
 }
 .press a:hover::after {
-  color: var(--green);
+  color: var(--crimson);
 }
 
 .faq {
@@ -1716,7 +1721,7 @@ a:hover {
   font-family: var(--font-mono);
   font-size: 22px;
   font-weight: 400;
-  color: var(--green);
+  color: var(--crimson);
 }
 .faq__item summary:hover {
   color: var(--green-dark);
@@ -1738,6 +1743,7 @@ a:hover {
 .closing {
   background: var(--deep-gradient);
   color: var(--on-deep);
+  border-top: 2px solid var(--crimson-rule);
 }
 .closing a:not(.btn) {
   color: var(--on-deep);
@@ -1774,7 +1780,7 @@ a:hover {
 .closing__kicker {
   font-size: 15px;
   font-weight: 400;
-  color: var(--mint);
+  color: var(--crimson-soft);
 }
 .closing__status {
   display: flex;
@@ -1784,6 +1790,9 @@ a:hover {
   font-weight: 500;
 }
 .closing__status .status-dot {
+  background: var(--crimson-rule);
+}
+.is-registration-open .closing__status .status-dot {
   background: var(--mint);
 }
 .closing__note {
@@ -1929,7 +1938,7 @@ a:hover {
   padding: 10px 16px;
   background: var(--deeper);
   color: var(--on-deep);
-  border-top: 2px solid var(--mint);
+  border-top: 2px solid var(--crimson-rule);
   --focus: var(--mint);
 }
 @media (max-width: 720px) {
