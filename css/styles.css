@@ -859,8 +859,9 @@ a:hover {
   letter-spacing: -0.01em;
 }
 .hero__title-main {
-  font-size: clamp(60px, 18vw, 168px);
-  line-height: 0.86;
+  font-size: clamp(24px, 6vw, 56px);
+  line-height: 1.1;
+  white-space: nowrap;
 }
 .hero__title-sub {
   font-size: clamp(30px, 10vw, 100px);

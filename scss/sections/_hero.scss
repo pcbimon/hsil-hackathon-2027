@@ -32,12 +32,13 @@
   }
 
   // "Hackathon 2027" is ~8.1em wide in Mona Sans 800 (about the same in the Arial fallback), so 10vw keeps it
-  // inside the viewport at 360px with a 16px gutter. HSIL is ~2.4em, so 18vw is safe too. Lines never wrap.
+  // inside the viewport at 360px with a 16px gutter. "Mahidol x Harvard" is the smaller lead line above it,
+  // ~9.5em wide, so 6vw is safe too. Lines never wrap.
   &__title {
     display: flex; flex-direction: column; margin-top: clamp(14px, 1.6vw, 22px);
     font-family: var(--font-display); font-weight: 800; line-height: 0.92; letter-spacing: -0.01em;
   }
-  &__title-main { font-size: clamp(60px, 18vw, 168px); line-height: 0.86; }
+  &__title-main { font-size: clamp(24px, 6vw, 56px); line-height: 1.1; white-space: nowrap; }
   &__title-sub { font-size: clamp(30px, 10vw, 100px); white-space: nowrap; }
   &__title-main, &__title-word {
     background: linear-gradient(180deg, var(--white) 40%, var(--silver) 72%, var(--white) 100%);

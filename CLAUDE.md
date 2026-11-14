@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-A static landing page for the **Mahidol x Harvard HSIL Hackathon 2027 — Official Thailand Hub** (Mahidol University hosting Harvard T.H. Chan's Health Systems Innovation Lab hackathon). The copy is in Thai. There's no framework and no runtime dependencies. The only dev dependency is Sass, and the compiled CSS is committed, so the site runs without a build step.
+A static landing page for the **Mahidol x Harvard Hackathon 2027 — Official Thailand Hub** (Mahidol University hosting Harvard T.H. Chan's Health Systems Innovation Lab hackathon). The copy is in Thai. There's no framework and no runtime dependencies. The only dev dependency is Sass, and the compiled CSS is committed, so the site runs without a build step.
 
 The page was first ported from the Claude Design canvas at https://claude.ai/artifact/BaNRDTtWKQRhPy5mDTynjh (artboard `project/Main.dc.html`). The current design ("ศูนย์ประเทศไทย: the artwork, carried through the page", developed as `v3/` and promoted to the root after the client's review) has moved away from that canvas. The client artwork in `assets/aw/` is now the visual reference.
 
