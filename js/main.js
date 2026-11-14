@@ -9,30 +9,23 @@ const APPLY_URL = '';
 const HACKATHON_START_UTC = Date.UTC(2027, 3, 16, 1, 0, 0);
 const MS_PER_DAY = 86400000;
 
-const CALENDAR_URL =
-  'https://calendar.google.com/calendar/render?action=TEMPLATE' +
-  '&text=Mahidol%20x%20Harvard%20HSIL%20Hackathon%202027' +
-  '&dates=20270416/20270418&location=Mahidol%20University%2C%20Bangkok';
-
-// Closed state = "Coming Soon" everywhere. index.html holds the closed-state text as the no-JS fallback,
-// so status/regLine are null here and the HTML (with its lang="en" spans) is left untouched.
+// Closed state: every CTA reads "Coming Soon" and is plain text, not a link (index.html holds the same
+// markup as the no-JS fallback, so nothing is rewritten). Open state: the CTAs become links to APPLY_URL.
 const CTA = REGISTRATION_OPEN
-  ? { href: APPLY_URL || '#', label: 'สมัครเข้าร่วมการแข่งขัน', short: 'สมัคร', note: 'เปิดรับสมัครแล้ว', status: 'เปิดรับสมัครแล้ว', regLine: 'Registration Now Open' }
-  : { href: CALENDAR_URL, label: 'บันทึกวันแข่งขันลงปฏิทิน', short: 'บันทึกวันแข่งขัน', note: 'เปิดรับสมัครเร็ว ๆ นี้', status: null, regLine: null };
+  ? { href: APPLY_URL || '#', label: 'สมัครเข้าร่วมการแข่งขัน', short: 'สมัคร', note: 'เปิดรับสมัครแล้ว', status: 'เปิดรับสมัครแล้ว' }
+  : null;
 
 function applyCta(cta) {
-  // data-cta="label|short" links get href + text; data-cta-note elements get the note text
+  document.documentElement.classList.toggle('is-registration-open', REGISTRATION_OPEN);
+  if (!cta) return;
+  // data-cta="label|short" become links with Thai labels; data-cta-note / data-reg-status get the status text
   document.querySelectorAll('[data-cta]').forEach((el) => {
     el.href = cta.href;
+    el.removeAttribute('lang');
     el.textContent = cta[el.dataset.cta];
   });
-  document.querySelectorAll('[data-cta-note]').forEach((el) => {
-    el.textContent = cta.note;
-  });
-  // The facts strip's "การรับสมัคร" value and the hero's "Registration Coming Soon" line follow the same switch
-  if (cta.status) document.querySelectorAll('[data-reg-status]').forEach((el) => { el.textContent = cta.status; });
-  if (cta.regLine) document.querySelectorAll('[data-reg-line]').forEach((el) => { el.textContent = cta.regLine; });
-  document.documentElement.classList.toggle('is-registration-open', REGISTRATION_OPEN);
+  document.querySelectorAll('[data-cta-note]').forEach((el) => { el.textContent = cta.note; });
+  document.querySelectorAll('[data-reg-status]').forEach((el) => { el.textContent = cta.status; });
 }
 
 // ---- Days left: one quiet line under the facts strip, days only (no ticking). Hidden without JS ----
