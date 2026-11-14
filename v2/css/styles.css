@@ -132,6 +132,10 @@ a:hover {
   font-variant-numeric: tabular-nums;
 }
 
+.nowrap {
+  white-space: nowrap;
+}
+
 .sr-only {
   position: absolute;
   width: 1px;
@@ -544,6 +548,13 @@ a:hover {
 .btn--paper:hover {
   background: var(--hover-tint);
   color: var(--deep);
+}
+.btn:not([href]) {
+  cursor: default;
+  pointer-events: none;
+}
+.btn:not([href])::after {
+  content: none;
 }
 .btn--small {
   min-height: var(--tap);
@@ -1270,7 +1281,7 @@ a:hover {
 }
 @media (max-width: 1023px) {
   .route__row {
-    grid-template-columns: 40px minmax(150px, 1fr) minmax(0, 2fr) 64px;
+    grid-template-columns: 40px minmax(150px, 1fr) minmax(0, 2fr) 80px;
     grid-template-areas: "no date stage status" "no where note status";
   }
 }
@@ -1352,6 +1363,7 @@ a:hover {
   color: var(--crimson);
   text-align: right;
   padding-right: 10px;
+  white-space: nowrap;
 }
 .route__status:empty {
   padding: 0;

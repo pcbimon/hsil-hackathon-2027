@@ -9,29 +9,24 @@ const APPLY_URL = '';
 const HACKATHON_START_UTC = Date.UTC(2027, 3, 16, 1, 0, 0);
 const MS_PER_DAY = 86400000;
 
-const CALENDAR_URL =
-  'https://calendar.google.com/calendar/render?action=TEMPLATE' +
-  '&text=Mahidol%20x%20Harvard%20HSIL%20Hackathon%202027' +
-  '&dates=20270416/20270418&location=Mahidol%20University%2C%20Bangkok';
-
+// Closed state: every CTA reads "Coming Soon" and is plain text, not a link (index.html holds the same
+// markup as the no-JS fallback, so nothing is rewritten). Open state: the CTAs become links to APPLY_URL.
 const CTA = REGISTRATION_OPEN
-  ? { href: APPLY_URL || '#', label: 'สมัครเข้าร่วม Hackathon', short: 'สมัครเลย', note: 'เปิดรับสมัครแล้ว ถึงกลาง ก.พ. 2570', status: 'เปิดรับสมัครแล้ว' }
-  : { href: CALENDAR_URL, label: 'บันทึกวันแข่งลงปฏิทิน', short: 'บันทึกวันแข่ง', note: 'เปิดรับสมัคร ธ.ค. 2569 – กลาง ก.พ. 2570', status: 'ยังไม่เปิดรับสมัคร' };
+  ? { href: APPLY_URL || '#', label: 'สมัครเข้าร่วมการแข่งขัน', short: 'สมัคร', note: 'เปิดรับสมัครแล้ว', status: 'เปิดรับสมัครแล้ว' }
+  : null;
 
 function applyCta(cta) {
-  // data-cta="label|short" links get href + text; data-cta-note elements get the note text
+  document.documentElement.classList.toggle('is-registration-open', REGISTRATION_OPEN);
+  if (!cta) return;
+  // data-cta="label|short" become links with Thai labels; data-cta-note / data-reg-status get the status text
   document.querySelectorAll('[data-cta]').forEach((el) => {
     el.href = cta.href;
+    el.removeAttribute('lang');
     el.textContent = cta[el.dataset.cta];
   });
-  document.querySelectorAll('[data-cta-note]').forEach((el) => {
-    el.textContent = cta.note;
-  });
-  // v2 only: the fact sheet's status row and the status dot follow the same switch
-  document.querySelectorAll('[data-reg-status]').forEach((el) => {
-    el.textContent = cta.status;
-  });
-  document.documentElement.classList.toggle('is-registration-open', REGISTRATION_OPEN);
+  document.querySelectorAll('[data-cta-note]').forEach((el) => { el.textContent = cta.note; });
+  // v2 only: the fact sheet's status row follows the same switch
+  document.querySelectorAll('[data-reg-status]').forEach((el) => { el.textContent = cta.status; });
 }
 
 // ---- Countdown: four tabular numerals, aria-hidden; screen readers get one static sentence ----
@@ -52,7 +47,7 @@ function setupCountdown() {
   const cells = {};
   grid.querySelectorAll('[data-unit]').forEach((el) => { cells[el.dataset.unit] = el; });
   const text = box.querySelector('[data-countdown-text]');
-  if (text) text.textContent = `อีก ${Math.ceil(remaining / MS_PER_DAY)} วันถึงวันแข่ง 16–17 เม.ย. 2570`;
+  if (text) text.textContent = `อีก ${Math.ceil(remaining / MS_PER_DAY)} วันถึงวันแข่งขัน 16–17 เมษายน 2570`;
 
   const render = () => {
     const t = splitRemaining(HACKATHON_START_UTC - Date.now());
@@ -73,7 +68,7 @@ function setupCountdown() {
 // ---- Pathway: badge the first stage that hasn't ended ----
 const bangkokEndOfDay = (isoDate) => Date.parse(`${isoDate}T23:59:59+07:00`);
 
-// Same rule as the main site: "ตอนนี้" once it has started, otherwise "ถัดไป".
+// Same rule as the main site: "ช่วงปัจจุบัน" once it has started, otherwise "ลำดับถัดไป".
 // A stage starts when the previous one ends; the first stage carries its own data-start.
 function markCurrentStep(nowMs) {
   const rows = [...document.querySelectorAll('.route__row[data-end]')];
@@ -90,7 +85,7 @@ function markCurrentStep(nowMs) {
     const label = document.createElement('span');
     label.className = 'sr-only';
     label.textContent = 'สถานะ: ';
-    status.append(label, started ? 'ตอนนี้' : 'ถัดไป');
+    status.append(label, started ? 'ช่วงปัจจุบัน' : 'ลำดับถัดไป');
   }
 }
 

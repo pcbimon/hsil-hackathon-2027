@@ -27,7 +27,7 @@ The page was first ported from the Claude Design canvas at https://claude.ai/art
 
 ## v2 (alternative design, for comparison)
 
-`v2/` is an earlier alternative design ("Official programme, Bangkok → Boston"): light paper ground, typography-led, crimson accents, monospace labels, a fact-sheet panel with a countdown, and the pathway as a route table. It is served at `/v2/` and kept for comparison only. It has its own `v2/index.html`, `v2/scss/` → `v2/css/styles.css` (`npm run build:v2` / `watch:v2`) and `v2/js/main.js`, and shares `../assets/`. Its Thai copy is the older, less formal wording and its registration state predates "Coming Soon", so don't copy text from it into the root page.
+`v2/` is an earlier alternative design ("Official programme, Bangkok → Boston"): light paper ground, typography-led, crimson accents, monospace labels, a fact-sheet panel with a countdown, and the pathway as a route table. It is served at `/v2/` and kept for comparison only. It has its own `v2/index.html`, `v2/scss/` → `v2/css/styles.css` (`npm run build:v2` / `watch:v2`) and `v2/js/main.js`, and shares `../assets/`. It now shares the root page's formal Thai copy and its "Coming Soon" CTA state (same `REGISTRATION_OPEN` / `APPLY_URL` switch and `.btn:not([href])` rule), so make copy changes in both pages.
 
 `/v3/` used to hold the current design before it moved to the root; `vercel.json` redirects `/v3/…` to `/`.
 
