@@ -6,7 +6,9 @@
     "build:main": "sass scss/main.scss css/styles.css --no-source-map",
     "build:v2": "sass v2/scss/main.scss v2/css/styles.css --no-source-map",
     "watch": "sass scss/main.scss css/styles.css --no-source-map --watch",
-    "watch:v2": "sass v2/scss/main.scss v2/css/styles.css --no-source-map --watch"
+    "watch:v2": "sass v2/scss/main.scss v2/css/styles.css --no-source-map --watch",
+    "export:wp": "node scripts/export-wp.mjs",
+    "test": "node --test scripts/*.test.mjs"
   },
   "devDependencies": {
     "sass": "^1.108.2"

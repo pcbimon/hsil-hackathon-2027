@@ -74,3 +74,14 @@ npm install
 npm run watch   # recompiles css/styles.css whenever an scss/ file changes
 npm run build   # one-off compile of the root page and v2/ before committing
 ```
+
+## WordPress export
+
+The INT Mahidol WordPress theme serves this page from `landings/hsil-hackathon-2027/` ("Standalone Landing" template). `npm run export:wp` (`scripts/export-wp.mjs`) writes that folder to `dist/wordpress/` (git- and Vercel-ignored): `content.php` / `en/content.php` (each page's `<body>`, header comment with the commit SHA, `-dirty` if the tree had uncommitted changes), `meta.php` / `en/meta.php` (`title`, `description`, `fonts`, `preload` from `<head>`), `css/`, `js/`, the referenced `assets/` and `SOURCE`. To sync, run it and replace the theme folder's contents with `dist/wordpress/` (keep the theme's `README.md`). `npm test` runs the exporter's self-check.
+
+The export does no hand conversion, so both pages must follow these rules (it fails loudly otherwise):
+- Asset paths are relative: `assets/…` in `index.html`, `../assets/…` in `en/index.html`. They become `int_landing_asset( 'assets/…' )`, and every referenced file must exist. Stylesheet `url()`s resolve from `css/`. Never reference `assets/aw/`.
+- Every TH/EN language link carries `data-lang-link="en"` or `"th"` (keep the relative `href` so the static site works); its `href` becomes `int_landing_lang_url()`. A relative link with `hreflang`, or to `en/` / `../`, without it fails the export.
+- No root-relative `src`/`href` (`/…`) in `<body>`, and no inline `<script>` or `<style>` there. Only `src="…"` scripts.
+- The theme prints its own `<head>`: only `<title>`, the description, the Google Fonts stylesheet and `rel="preload"` links carry over. `hreflang` alternates, `css/styles.css` and `js/main.js` are wired by the theme.
+- `#anchors`, `mailto:`, `tel:` and absolute URLs pass through unchanged. Don't rely on Vercel-only features (`vercel.json` redirects, rewrites, headers, clean URLs) for anything the page needs; WordPress won't have them.
