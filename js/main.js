@@ -1,4 +1,4 @@
-// Mahidol x Harvard HSIL Hackathon — Thailand Hub landing page ("ศูนย์ประเทศไทย: the artwork, carried through the page")
+// Mahidol x Harvard Hackathon — Thailand Hub landing page ("ศูนย์ประเทศไทย: the artwork, carried through the page")
 // Progressive enhancement only: every section is readable without this file.
 
 // Flip REGISTRATION_OPEN to true and set APPLY_URL when applications open (Dec 2026).

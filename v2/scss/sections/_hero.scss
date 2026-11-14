@@ -17,13 +17,15 @@
 
   &__mast { display: flex; flex-direction: column; gap: clamp(14px, 2vw, 24px); }
 
-  // "HSIL Hackathon" is at most ~7.9em wide in Mona Sans 800 (and in the Arial fallback), so 10vw keeps
-  // it inside the viewport at 360px with a 16px gutter. The line never wraps.
+  // "Hackathon" is ~5.5em wide in Mona Sans 800 (and in the Arial fallback), so 10vw keeps it inside the
+  // viewport at 360px with a 16px gutter. The "Mahidol x Harvard" lead (~9.5em) sits above it at 0.5em.
+  // Lines never wrap.
   &__title, &__year {
     font-family: var(--font-display); font-weight: 800; font-size: clamp(34px, 10vw, 128px);
     line-height: 0.98; letter-spacing: -0.025em; white-space: nowrap;
   }
   &__title { color: var(--ink); }
+  &__title-lead { display: block; font-size: 0.5em; line-height: 1.2; letter-spacing: -0.01em; }
   &__year { color: var(--crimson); }
 
   // The year opens the left column so the fact sheet can sit beside it, inside the first screen
