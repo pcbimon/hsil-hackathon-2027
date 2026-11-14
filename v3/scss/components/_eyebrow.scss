@@ -1,8 +1,0 @@
-// Short label with a small crimson bar, as in the artwork: "Official Thailand Hub · มหาวิทยาลัยมหิดล".
-// One of the page's few crimson marks.
-.eyebrow {
-  display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
-  font-size: 16px; font-weight: 400; line-height: 1.4; color: var(--ink);
-
-  &::before { content: ""; flex: none; width: 5px; height: 1.4em; border-radius: 1px; background: var(--crimson); }
-}

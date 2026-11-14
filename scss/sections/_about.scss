@@ -1,33 +1,11 @@
 @use "../abstracts" as *;
 
-// "Who should join": audience cards + quick facts
-.about {
-  padding-top: 96px; padding-bottom: 96px; display: flex; flex-direction: column; gap: 40px;
-  @include mobile { padding-top: 64px; padding-bottom: 64px; }
-}
+// 01: who should join. Roles are set as one run of large text separated by slashes.
+.roles {
+  font-size: clamp(20px, 2.4vw, 30px); font-weight: 400; line-height: 1.55;
 
-// Four cards: 4 across, 2x2 on tablet, then one column once two no longer fit. Never 3 + an orphan.
-.cards {
-  display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px;
-  @include tablet-down { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  @include mobile { grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); }
-}
-.card {
-  background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
-  padding: 28px; display: flex; flex-direction: column; gap: 10px;
-
-  h3 { font-size: 20px; font-weight: 500; }
-  p { font-size: 15px; color: var(--ink-soft); }
-  svg { width: 28px; height: 28px; fill: none; stroke: var(--green); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
-}
-
-.quickfacts {
-  display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px;
-  @include mobile { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-}
-.quickfact {
-  display: flex; flex-direction: column; gap: 2px; padding: 16px 20px; background: var(--tint); border-radius: 12px;
-
-  &__label { font-size: 13px; color: var(--ink-soft); }
-  &__value { font-size: 17px; font-weight: 500; }
+  span {
+    white-space: nowrap;
+    &:not(:last-child)::after { content: " /"; color: var(--green); font-weight: 300; }
+  }
 }

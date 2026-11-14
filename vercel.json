@@ -7,5 +7,12 @@
     }
   },
   "outputDirectory": ".",
-  "trailingSlash": true
+  "trailingSlash": true,
+  "redirects": [
+    {
+      "source": "/v3/:path*",
+      "destination": "/",
+      "permanent": false
+    }
+  ]
 }
