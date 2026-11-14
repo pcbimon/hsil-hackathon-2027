@@ -1,0 +1,11 @@
+// Two breakpoints only. Prefer fluid sizing (clamp + vw) over adding more; see CLAUDE.md "Responsive".
+$tablet: 1023px; // nav collapses behind .nav-toggle
+$mobile: 720px;  // 16px gutter, sticky .m-bar CTA
+
+@mixin tablet-down {
+  @media (max-width: $tablet) { @content; }
+}
+
+@mixin mobile {
+  @media (max-width: $mobile) { @content; }
+}

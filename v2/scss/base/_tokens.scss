@@ -1,0 +1,89 @@
+// v2 "Official programme" tokens. CSS custom properties, not Sass variables, because some change at runtime
+// (--gutter on mobile, the --on-* set inside dark bands). Primitive scales hold raw hex (shared with the
+// root scss/base/_tokens.scss, plus a paper neutral); components only use the semantic names.
+// No raw hex outside this file.
+@use "../abstracts" as *;
+
+:root {
+  // ---- Primitive: raw palette ----
+  --white: #FFFFFF;
+
+  // Paper: warm off-white ground for the programme-book look
+  --paper-50:  #FDFCF8;
+  --paper-100: #F8F5EE;
+  --paper-200: #F0EBE0;
+  --paper-300: #E2DBCB;
+  --paper-400: #CFC6B2;
+
+  // Green (shared with the main site)
+  --green-100: #DDF3EA;
+  --green-200: #BFE3D6;
+  --green-300: #A9E6CB;
+  --green-600: #0A7A5A;
+  --green-700: #075C44;
+  --green-950: #04312F;
+
+  // Teal (shared)
+  --teal-300: #C8DCD5;
+  --teal-400: #9DB8B0;
+  --teal-600: #3E8F7E;
+  --teal-700: #2F7A70;
+  --teal-850: #06403F;
+  --teal-900: #06363A;
+  --teal-950: #032326;
+
+  // Red: Harvard crimson (shared)
+  --red-300: #FF9AA0;
+  --red-400: #FF5A63;
+  --red-600: #A51C30;
+
+  // Gray: green-tinted text (shared)
+  --gray-600: #48605B;
+  --gray-900: #0F2A2A;
+
+  // ---- Semantic: what components use ----
+  --paper: var(--paper-100);          // page ground
+  --paper-tint: var(--paper-200);     // alternate section band
+  --sheet: var(--paper-50);           // fact sheet / panels
+  --ink: var(--green-950);            // deep green ink, 12.9:1 on --paper
+  --ink-soft: var(--gray-600);        // secondary text + mono labels, 6.2:1 on --paper, 5.7:1 on --paper-tint
+  --rule: var(--paper-300);           // hairline rules
+  --rule-strong: var(--ink);          // section top rules, table heads
+  --slot: var(--paper-300);           // empty sponsor logo slot
+  --grid-line: rgb(4 49 47 / 0.05);   // hero texture
+
+  --green: var(--green-600);          // links on paper
+  --green-dark: var(--green-700);
+  --hover-tint: var(--green-100);
+
+  --crimson: var(--red-600);          // accent on paper (6.9:1)
+  --crimson-bright: var(--red-400);   // thin rules + dots on dark (not text)
+  --crimson-soft: var(--red-300);     // accent text on dark (6.9:1 on --deep)
+
+  // Dark bands (pathway + closing/footer)
+  --deep: var(--green-950);
+  --deeper: var(--teal-950);
+  --deep-rule: var(--teal-850);
+  --deep-rule-strong: var(--teal-600);
+  --on-deep: var(--paper-100);        // 12.4:1 on --deep
+  --on-deep-muted: var(--teal-400);   // 6.6:1 on --deep
+  --on-deep-accent: var(--green-200);
+  --deep-now: rgb(255 255 255 / 0.06);
+
+  // Placeholder / unconfirmed content markers
+  --mock: var(--crimson);
+
+  // ---- Type ----
+  --font-thai: Kanit, "Noto Sans Thai", Loma, system-ui, sans-serif;
+  --font-display: "Mona Sans", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+
+  // ---- Layout ----
+  --container: 1200px;
+  --gutter: 24px;
+  --radius: 3px;
+  --tap: 44px;
+  --section-space: clamp(56px, 7vw, 96px);
+
+  @include mobile { --gutter: 16px; }
+}

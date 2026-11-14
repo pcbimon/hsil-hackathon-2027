@@ -1,0 +1,69 @@
+@use "../abstracts" as *;
+
+// 03: Bangkok -> Boston as a departures board. Six columns on desktop; on tablet two lines per row;
+// on mobile each row stacks (no horizontal scroll).
+.route {
+  --route-cols: 48px minmax(150px, 1.1fr) minmax(0, 1.5fr) minmax(150px, 1fr) minmax(0, 1.4fr) 88px;
+  border-top: 1px solid var(--rule-strong);
+
+  &__head {
+    display: grid; grid-template-columns: var(--route-cols); gap: 16px; padding: 10px 0;
+    border-bottom: 1px solid var(--rule-strong);
+    font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-soft);
+    @include tablet-down { display: none; }
+  }
+
+  &__row {
+    display: grid; grid-template-columns: var(--route-cols); gap: 6px 16px; align-items: baseline;
+    padding: 18px 0; border-bottom: 1px solid var(--rule); position: relative;
+    @include tablet-down {
+      grid-template-columns: 40px minmax(150px, 1fr) minmax(0, 2fr) 64px;
+      grid-template-areas: "no date stage status" "no where note status";
+    }
+    @include mobile {
+      grid-template-columns: 36px minmax(0, 1fr) auto;
+      grid-template-areas: "no date status" "no stage stage" "no where where" "no note note";
+      gap: 4px 12px;
+    }
+
+    &.is-past { --row-fg: var(--on-deep-muted); }
+    &.is-now {
+      background: var(--deep-now);
+      box-shadow: inset 2px 0 0 var(--crimson-bright);
+    }
+  }
+
+  &__no, &__date, &__stage, &__where, &__note, &__status {
+    @include tablet-down { grid-area: var(--area); }
+  }
+  &__no {
+    --area: no; font-size: 13px; color: var(--ink-soft); padding-left: 10px;
+    @include tablet-down { padding-left: 8px; }
+  }
+  &__date {
+    --area: date; display: flex; flex-direction: column; gap: 2px;
+    .mono { font-size: 15px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--row-fg, var(--on-deep)); }
+  }
+  &__date-th { font-size: 13px; color: var(--ink-soft); }
+  &__stage {
+    --area: stage; font-size: clamp(18px, 1.6vw, 21px); font-weight: 500; line-height: 1.35; color: var(--row-fg, var(--on-deep));
+    @include mobile { margin-top: 4px; }
+  }
+  &__where {
+    --area: where; font-size: 13px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--on-deep-accent);
+  }
+  &__note { --area: note; font-size: 15px; color: var(--ink-soft); line-height: 1.55; }
+  &__status {
+    --area: status; font-size: 14px; font-weight: 500; color: var(--crimson); text-align: right; padding-right: 10px;
+    &:empty { padding: 0; }
+  }
+
+  &__row--key &__stage { font-weight: 600; }
+  &__row--boston {
+    border-bottom-color: var(--rule-strong);
+    .route__stage { font-family: var(--font-display); font-weight: 800; font-size: clamp(22px, 2.2vw, 30px); letter-spacing: -0.01em; }
+    .route__where { color: var(--crimson); }
+  }
+
+  &__footnote { margin-top: 24px; font-size: 14px; color: var(--ink-soft); max-width: 52em; }
+}

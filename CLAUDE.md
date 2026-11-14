@@ -23,6 +23,10 @@ It was ported from the Claude Design canvas at https://claude.ai/artifact/BaNRDT
 - Hero: follows the client artwork `assets/aw/Harvard Hackathon 2027_ComingSoon.jpg`. The background is `assets/hero-bg.webp`, a 2400px copy of `assets/aw/Harvard Hackathon 2027_BG.jpg` (regenerate with `ffmpeg -i "assets/aw/Harvard Hackathon 2027_BG.jpg" -vf scale=2400:-1 -q:v 78 assets/hero-bg.webp`). The original artwork in `assets/aw/` is kept out of git because the files are large. The title and theme line use Hubot Sans, the artwork's font. Everything else stays in Kanit.
 - `js/main.js`: progressive enhancement only. It fills the countdown (`[data-days-left]`), swaps the CTA state, collapses the nav behind `.nav-toggle`, badges the current pathway step and runs count-ups.
 
+## v2 (alternative design, for comparison)
+
+`v2/` is a second, self-contained design of the same page ("Official programme, Bangkok → Boston"): light paper ground, typography-led, no icons, a fact-sheet panel with a countdown, numbered sections, and the pathway as a route table. It is served at `/v2/` and exists so the client can compare it with the root page. It has its own `v2/index.html`, `v2/scss/` → `v2/css/styles.css` (`npm run build:v2` / `watch:v2`; `npm run build` compiles both) and `v2/js/main.js`, and shares `../assets/`. The same content rules apply. Differences from the root page: display type is Mona Sans (plain zero and I, as in the client artwork), Latin/numeric labels are IBM Plex Mono (never set Thai in mono), and `data-mock` content is visibly marked with a dotted crimson underline. Keep facts in the two pages in sync when copy changes.
+
 ## Responsive
 
 The page has to work at every width from 360px to 1440px+, not just at the breakpoints.
