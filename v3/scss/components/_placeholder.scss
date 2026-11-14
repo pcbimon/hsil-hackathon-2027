@@ -1,0 +1,27 @@
+// Content still awaiting real material. See CLAUDE.md "Content conventions".
+
+.todo { color: var(--green); } // content still awaiting confirmation (crimson is a rare accent in v3)
+
+// [data-mock] = mock/unconfirmed content (same attribute as the main site). v3 keeps it visible:
+// a dotted dark-green underline on light grounds (soft mint on dark ones, set in layout/_section.scss),
+// and a dashed frame on photos inside mock blocks.
+[data-mock] {
+  text-decoration: underline dotted var(--mock);
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 0.22em;
+  text-decoration-skip-ink: none;
+
+  img { outline: 1px dashed var(--mock); outline-offset: -1px; }
+}
+
+.mock-legend {
+  text-decoration: underline dotted var(--mock); text-decoration-thickness: 1.5px; text-underline-offset: 0.22em;
+  align-self: flex-start;
+}
+
+// Gray sponsor slot: the [square bracket] text marks it as a placeholder
+.logo-slot {
+  display: flex; align-items: center; justify-content: center; min-height: 64px; padding: 8px;
+  background: var(--slot); border-radius: var(--radius);
+  font-size: 14px; color: var(--ink-soft); text-align: center; line-height: 1.4;
+}

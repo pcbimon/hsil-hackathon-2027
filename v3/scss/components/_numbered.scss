@@ -1,0 +1,35 @@
+@use "../abstracts" as *;
+
+// Numbered typographic list (no icon cards): green index numeral, heading, one line
+.numbered {
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 32px;
+  @include mobile { grid-template-columns: minmax(0, 1fr); }
+
+  &__item {
+    display: grid; grid-template-columns: 56px minmax(0, 1fr); gap: 4px 16px; align-content: start;
+    padding: 20px 0; border-top: 1px solid var(--rule);
+    // first row: the .split rule above already separates it
+    &:nth-child(-n + 2) { border-top: 0; padding-top: 4px; }
+    @include mobile {
+      grid-template-columns: 44px minmax(0, 1fr);
+      &:nth-child(2) { border-top: 1px solid var(--rule); padding-top: 20px; }
+    }
+
+    h3, h4 { grid-column: 2; font-size: 19px; font-weight: 500; line-height: 1.4; }
+    p { grid-column: 2; color: var(--ink-soft); font-size: 16px; line-height: 1.65; }
+  }
+  &__num {
+    grid-row: 1 / span 2; font-size: 28px; line-height: 1.1; color: var(--green); padding-top: 2px;
+    @include mobile { font-size: 22px; }
+  }
+
+  // single column variant (benefits, beside the prize ladder)
+  &--stacked {
+    grid-template-columns: minmax(0, 1fr);
+    .numbered__item {
+      padding: 22px 0;
+      &:nth-child(-n + 2) { border-top: 1px solid var(--rule); padding-top: 22px; }
+      &:first-child { border-top: 1px solid var(--rule-strong); }
+    }
+  }
+}

@@ -2,11 +2,13 @@
   "name": "hsil-thailand-hub",
   "private": true,
   "scripts": {
-    "build": "npm run build:main && npm run build:v2",
+    "build": "npm run build:main && npm run build:v2 && npm run build:v3",
     "build:main": "sass scss/main.scss css/styles.css --no-source-map",
     "build:v2": "sass v2/scss/main.scss v2/css/styles.css --no-source-map",
+    "build:v3": "sass v3/scss/main.scss v3/css/styles.css --no-source-map",
     "watch": "sass scss/main.scss css/styles.css --no-source-map --watch",
-    "watch:v2": "sass v2/scss/main.scss v2/css/styles.css --no-source-map --watch"
+    "watch:v2": "sass v2/scss/main.scss v2/css/styles.css --no-source-map --watch",
+    "watch:v3": "sass v3/scss/main.scss v3/css/styles.css --no-source-map --watch"
   },
   "devDependencies": {
     "sass": "^1.108.2"

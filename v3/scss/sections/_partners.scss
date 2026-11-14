@@ -1,0 +1,64 @@
+@use "../abstracts" as *;
+
+// 05: partner tiers as ruled rows (Thai tier label | logos). Mahidol, the host, comes first and largest;
+// then the global and strategic partners, sponsors and the 2569 press list.
+.tiers {
+  border-top: 1px solid var(--rule-strong);
+
+  &__row {
+    display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 12px 24px; align-items: center;
+    padding: 24px 0; border-bottom: 1px solid var(--rule);
+    @include tablet-down { grid-template-columns: minmax(0, 1fr); padding: 20px 0; }
+  }
+  &__label {
+    grid-column: 1 / 4; font-size: 15px; font-weight: 400; color: var(--ink-soft); line-height: 1.5;
+    @include tablet-down { grid-column: 1 / -1; }
+  }
+  &__logos, &__body {
+    grid-column: 4 / -1; min-width: 0;
+    @include tablet-down { grid-column: 1 / -1; }
+  }
+  &__logos { display: flex; align-items: center; }
+  &__logos--slots {
+    display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 12px;
+    @include tablet-down { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    @include mobile { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  &__logo {
+    height: 44px; width: auto; max-width: 100%;
+    @include mobile { height: 36px; }
+
+    // the official Mahidol PNG has ~14% built-in margins; enlarge it and pull the margins back
+    &--mahidol {
+      height: 112px; margin: -16px 0 -16px -12px;
+      @include mobile { height: 84px; margin: -12px 0 -12px -9px; }
+    }
+    &--partner { height: 34px; @include mobile { height: 28px; } }
+    &--nia { height: 60px; @include mobile { height: 50px; } }
+  }
+  &__note { font-size: 15px; color: var(--ink-soft); margin-bottom: 8px; }
+
+  // Host row: larger padding, the label in ink, the organiser named beside the logo
+  &__row--host {
+    padding: 32px 0;
+    .tiers__label { color: var(--ink); font-weight: 500; }
+  }
+  &__host {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 16px 40px;
+    p { font-size: 17px; line-height: 1.6; max-width: 22em; }
+  }
+}
+
+.press {
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 24px;
+  @include mobile { grid-template-columns: minmax(0, 1fr); }
+
+  a {
+    display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 52px;
+    border-bottom: 1px solid var(--rule); color: var(--ink); text-decoration: none; font-size: 18px; font-weight: 400;
+
+    &::after { content: "↗"; font-family: var(--font-mono); font-size: 14px; color: var(--ink-soft); }
+    &:hover { color: var(--green); }
+    &:hover::after { color: var(--green); }
+  }
+}
